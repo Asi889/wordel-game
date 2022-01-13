@@ -111,7 +111,7 @@ export default {
 
     };
 
-    return { alpabet, handlClick, restOfElphabet, word1, checkWord, enterChar, darkMode };
+    return { alpabet, restOfElphabet, word1, checkWord, enterChar, darkMode };
   },
 };
 </script>
