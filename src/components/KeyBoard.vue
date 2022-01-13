@@ -59,11 +59,6 @@ export default {
     ]);
     const restOfElphabet = reactive(["ק", "ר", "ש", "ת"]);
 
-    const handlClick = () => {
-      let inputs = document.querySelectorAll(".slotwrapper");
-      console.log(inputs);
-      console.log("inputs test");
-    };
 
     const enterChar = (e) => {
       const foundd = word1.find(
@@ -74,8 +69,7 @@ export default {
       const emptyRow = slots.find((slot) => slot.id == foundd.id);
       const testyy = [...emptyRow.children];
       const emptyInput = testyy.find((input) => input.value === "");
-      console.log(emptyInput.nextSibling);
-      console.log("emptyInput");
+      
       word1.map((wordObj) => {
         wordObj.letters.map((letter) => {
           if(wordObj.id == emptyRow.id && letter.id == emptyInput.id )
@@ -115,8 +109,6 @@ export default {
         }
       });
 
-      console.log(word1);
-      console.log("fisrtRow");
     };
 
     return { alpabet, handlClick, restOfElphabet, word1, checkWord, enterChar, darkMode };

@@ -55,8 +55,6 @@ export default {
   setup(props) {
     const { layout, darkMode, toggleDarkMode } = props;
     const handlClick = () => {
-      console.log("shubi");
-      console.log(layout);
       layout.main = true;
       layout.settings = false;
       layout.info = false;
