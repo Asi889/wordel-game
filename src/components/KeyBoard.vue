@@ -105,6 +105,7 @@ export default {
           letterObj.inWord = true;
         } else {
           letterObj.inWord = false;
+          letterObj.notInWord = false;
         }
 
         if (dictionary[index] === letterObj.letter) {

@@ -6,7 +6,7 @@
       maxlength="1"
       class="border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center"
       :id="char.id"
-      v-bind:class="{darkModeRows: darkMode , active1: char.letter.length > 0, inword: char.inWord === true, inposition: char.rightPosition === true}"
+      v-bind:class="{darkModeRows: darkMode , active1: char.letter.length > 0, inword: char.inWord === true, inposition: char.rightPosition === true, notInword: char.notInWord === false}"
       type="text"
       v-model="char.letter"
       v-on:keydown="focusNext"
@@ -71,6 +71,10 @@ export default defineComponent({
   color: white !important;
   /* -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg); */
+}
+.notInword {
+background-color: gray!important;
+  color: white !important;
 }
 .darkModeRows {
   background-color: #121213;
