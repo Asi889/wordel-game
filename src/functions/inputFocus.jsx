@@ -12,8 +12,8 @@ export function inputFocus (e) {
             if (next == null) break;
             if (next.tagName.toLowerCase() === "input") {
                 next.focus();
-                console.log(word);
-                console.log("word");
+                // console.log(word);
+                // console.log("word");
 
                 break;
             }
@@ -26,8 +26,8 @@ export function inputFocus (e) {
             if (previous == null) break;
             if (previous.tagName.toLowerCase() === "input") {
                 previous.focus();
-                console.log(word);
-                console.log("word111");
+                // console.log(word);
+                // console.log("word111");
                 break;
             }
         }
