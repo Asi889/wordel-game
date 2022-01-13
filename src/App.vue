@@ -1,26 +1,20 @@
 <template>
-  <div
-    class="appWrapper w-full h-full"
-    v-bind:class="{ appDarkmode: darkMode }"
-  >
+  <div class="appWrapper w-full h-full" v-bind:class="{ appDarkmode: darkMode }">
     <div
       v-if="layout.main"
       class="flex flex-col gap-y-4 w-full max-w-lg mx-auto h-[100vh] justify-around"
     >
-      <TopBar
-        :layout="layout"
-        :darkMode="darkMode"
-        :toggleDarkMode="toggleDarkMode"
-      />
+      <TopBar :layout="layout" :darkMode="darkMode" :toggleDarkMode="toggleDarkMode" />
 
       <div class="mt-14 flex flex-col gap-y-4 last:">
         <FirstSlot
+        :ref="`slot${index}`"
           v-for="(row, index) in word1"
           v-bind:key="row.id"
           :row="row"
           :word="word"
           :darkMode="darkMode"
-          :rowIndex="index+1"
+          :rowIndex="index + 1"
         />
       </div>
       <div
@@ -30,7 +24,7 @@
         <KeyBoard :attempts="attempts" :word1="word1" :darkMode="darkMode" />
       </div>
     </div>
-    <div class="w-full max-w-lg mx-auto h-[100vh] justify-around ">
+    <div class="w-full max-w-lg mx-auto h-[100vh] justify-around">
       <SettingsPage
         v-if="layout.settings"
         :layout="layout"
@@ -51,6 +45,7 @@ import KeyBoard from "./components/KeyBoard.vue";
 import SettingsPage from "./components/SettingsPage.vue";
 import InfoPage from "./components/InfoPage.vue";
 import { getTodayWord } from "./utils/letters";
+import { currentInput } from "./state/focus";
 interface Attemps {
   first: boolean;
   seconde: boolean;
@@ -170,32 +165,6 @@ export default defineComponent({
       darkMode.value = !darkMode.value;
     };
 
-    window.onload = () => {
-      const slots = [...document.querySelectorAll(".slotwrapper")] as any;
-
-      const emptyInput = slots.find(
-        (slot: any) => slot.firstElementChild.value === ""
-      );
-      const firstRow = slots.find((slot: any) => slot.firstElementChild);
-      const secondRow = slots.find(
-        (slot: any) => slot.firstElementChild
-      ).nextSibling;
-      const firstInput = slots.find(
-        (slot: any) => slot.firstElementChild
-      ).firstElementChild;
-      console.log(emptyInput);
-      console.log("found");
-      emptyInput.firstElementChild.focus();
-
-
-      console.log("slots[0].firstElementChild.value");
-    };
-
-    // var items = ["a", "b", "c", "d", "e", "f"];
-    // var day = new Date().getDay();
-
-    // console.log(items[day % items.length]);
-    // console.log("outp994");
 
     return {
       layout,
@@ -207,6 +176,12 @@ export default defineComponent({
       toggleDarkMode,
     };
   },
+  mounted() {
+    const firstInput = document.querySelector(`#input-1-1`) as HTMLInputElement;
+    if(firstInput){
+      firstInput.focus()
+    }
+  }
 });
 </script>
 
@@ -226,7 +201,6 @@ export default defineComponent({
   font-weight: bold;
   background-color: #818384;
 }
-
 
 /* div.slide-up {
   height: 300px;

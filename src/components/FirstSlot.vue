@@ -4,15 +4,14 @@
       v-for="char in row.letters"
       v-bind:key="char.id"
       maxlength="1"
-      class="border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center"
-      :id="char.id"
+      class="border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center focus:ring-1 ring-purple-700"
+      :id="`input-${rowIndex}-${char.id}`"
       v-bind:class="{darkModeRows: darkMode , active1: char.letter.length > 0, inword: char.inWord === true, inposition: char.rightPosition === true, notInword: char.notInWord === false}"
       type="text"
       v-model="char.letter"
-      v-on:keydown="focusNext"
-      @change="focusNext"
       :disabled="row.tried === false"
       dir="rtl"
+      @input="setFocus(char)"
     />
   </div>
 </template>
@@ -29,19 +28,12 @@ export default defineComponent({
   components: {},
   setup(props) {
     const { rowIndex, word, row, darkMode } = props;
+    const setFocus =(char:any)=>{
+      console.log(char);
+      
+    }
 
-    const dictionary = getTodayWord();
-    const isInWord = computed(()=>{
-
-    })
-
-    const focusNext = (e: any) => {
-      inputFocus(e);
-    };
-
-    
-
-    return { focusNext, word, rowIndex, row, darkMode };
+    return {  word, rowIndex, row, darkMode,setFocus };
   },
 });
 </script>

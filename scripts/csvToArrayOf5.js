@@ -14,14 +14,14 @@ function readFile(path){
     })
 }
 const LENGTH = 5;
-const file = readFile('./words.csv').then(words =>{
+const file = readFile('./scripts/words.csv').then(words =>{
     const res =[];
     words.forEach(([word]) => {
         if(word && word.length ===LENGTH && (/[\u0590-\u05FF]/).test(word) ){
             res.push(word);
         }
     });
-    console.log(`Created noew aray with:${words.length}`);
+    console.log(`Created new array with:${words.length}`);
     fs.writeFile("5letterWords.json", JSON.stringify(res,null, 4), function(err) {
         if (err) {
             console.log(err);
