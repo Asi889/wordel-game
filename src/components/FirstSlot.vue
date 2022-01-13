@@ -18,6 +18,7 @@
 </template>
 
 <script lang="ts">
+import { getTodayWord } from "@/utils/letters.js";
 import { defineComponent, reactive } from "@vue/runtime-core";
 import { computed } from "vue";
 import { inputFocus } from "../functions/inputFocus.jsx";
@@ -29,7 +30,7 @@ export default defineComponent({
   setup(props) {
     const { rowIndex, word, row, darkMode } = props;
 
-    const dictionary = "בנאלי";
+    const dictionary = getTodayWord();
     const isInWord = computed(()=>{
 
     })
