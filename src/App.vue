@@ -20,7 +20,7 @@
           :row="row"
           :word="word"
           :darkMode="darkMode"
-          :rowIndex="++index"
+          :rowIndex="index+1"
         />
       </div>
       <div
@@ -81,8 +81,6 @@ export default defineComponent({
   },
   setup() {
     const todayWord = getTodayWord();
-    console.log(todayWord);
-
     const layout = reactive({
       settings: false,
       info: false,

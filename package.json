@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "csv": "node scripts/csvToArrayOf5.js "
   },
   "dependencies": {
     "@tailwindcss/postcss7-compat": "^2.2.17",
@@ -22,6 +23,7 @@
     "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
+    "csv-parse": "^5.0.4",
     "typescript": "~4.1.5",
     "vue-cli-plugin-tailwind": "~2.2.18"
   }

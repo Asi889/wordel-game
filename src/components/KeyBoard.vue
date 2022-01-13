@@ -32,6 +32,7 @@
 
 <script>
 import { reactive } from "@vue/reactivity";
+import { getTodayWord } from '@/utils/letters';
 
 export default {
   props: ["attempts", "word1", "darkMode"],
@@ -88,7 +89,7 @@ export default {
       // }
     };
 
-    const dictionary = "בנאלי";
+    const dictionary =getTodayWord();
 
     const checkWord = () => {
       const firstRow = word1.find(
