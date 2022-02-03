@@ -4,9 +4,9 @@
       v-for="char in row.letters"
       v-bind:key="char.id"
       maxlength="1"
-      class="border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center"
+      class="border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center rotate"
       :id="char.id"
-      v-bind:class="{darkModeRows: darkMode , active1: char.letter.length > 0, inword: char.inWord === true, inposition: char.rightPosition === true, notInword: char.notInWord === false}"
+      v-bind:class="{darkModeRows: darkMode , active1: char.letter.length > 0, inword: char.inWord === true, inposition: char.rightPosition === true, notInword: char.notInWord === false, veritaclfliph: flipit.value }"
       type="text"
       v-model="char.letter"
       v-on:keydown="focusNext"
@@ -18,18 +18,19 @@
 </template>
 
 <script lang="ts">
-import { getTodayWord } from "@/utils/letters.js";
+import { getTodayWord } from "../utils/letters";
 import { defineComponent, reactive } from "@vue/runtime-core";
 import { computed } from "vue";
 import { inputFocus } from "../functions/inputFocus.jsx";
 
 export default defineComponent({
   name: "FirstSlot",
-  props: ["rowIndex", "word", "row", "darkMode"],
+  props: ["rowIndex", "word", "row", "darkMode", "flipit"],
   components: {},
   setup(props) {
-    const { rowIndex, word, row, darkMode } = props;
-
+    const { rowIndex, word, row, darkMode, flipit } = props;
+// console.log(flipit);
+//         console.log("flip9");
     const dictionary = getTodayWord();
     const isInWord = computed(()=>{
 
@@ -41,7 +42,7 @@ export default defineComponent({
 
     
 
-    return { focusNext, word, rowIndex, row, darkMode };
+    return { focusNext, word, rowIndex, row, darkMode, flipit };
   },
 });
 </script>
@@ -80,5 +81,21 @@ background-color: gray!important;
 .darkModeRows {
   background-color: #121213;
   color: white;
+  /* animation-name: vertical-rotate;
+  animation-duration: 3.5s; */
+}
+
+.veritaclfliph {
+  animation-name: vertical-rotate;
+  animation-duration: 3.5s;
+}
+
+@keyframes vertical-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotateX(500deg);
+  }
 }
 </style>
