@@ -1,7 +1,7 @@
 <template>
   <div
-    class="info-wrapper pt-3 w-full flex flex-col gap-y-4 scene_element scene_element--fadeinup"
-    v-bind:class="{ settingsWrapperDark: darkMode, fadeOut: fadeout1 }"
+    class="info-wrapper pt-3 w-full flex flex-col gap-y-4  scene_element scene_element--fadeinup"
+    v-bind:class="{ settingsWrapperDark: darkMode, fadeOut: fadeout1.value }"
   >
     <div class="flex justify-between">
       <span></span>
@@ -141,11 +141,12 @@
 </template>
 
 <script>
+import { ref } from '@vue/reactivity';
 export default {
   props: ["layout", "darkMode", "fadeEff"],
   setup(props) {
     const { layout, darkMode, fadeEff} = props;
-    let fadeout1= false
+    let fadeout1= ref(false)
     const handlClick = () => {
       layout.main = true;
       layout.settings = false;
@@ -197,7 +198,7 @@ export default {
 @keyframes fadeInUp {
   0% {
     opacity: 0;
-    transform: translate3d(0, 70%, 0);
+    transform: translate3d(50%, 70%, 0);
   }
   50% {
     opacity: 0;
@@ -206,7 +207,7 @@ export default {
 
   100% {
     opacity: 1;
-    transform: none;
+    /* transform: none; */
   }
 }
 
@@ -225,13 +226,13 @@ export default {
 
   /** Basic styles for an animated element */
   .scene_element {
-    animation-duration: 0.25s;
+    /* animation-duration: 1.25s;
     transition-timing-function: ease-in;
-    animation-fill-mode: both;
+    animation-fill-mode: ease-in; */
 
   }
   .fadeOut {
-    animation-direction: alternate-reverse;
+    /* animation-direction: alternate-reverse; */
   }
 
   

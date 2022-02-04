@@ -1,6 +1,6 @@
 <template>
   <div
-    class="self-center z-10 fixed max-h-[466px] max-w-w[422px] h-[450px] w-[420px] bg-white rounded-lg shadow-2xl border-black px-5 py-5"
+    class="self-center z-10 fixed max-h-[466px] max-w-w[422px] slide-up h-[450px] w-[420px] bg-white rounded-lg shadow-2xl border-black px-5 py-5"
   >
     <div class="grid">
       <h1 class="justify-self-center text-3xl font-bold">לא הצליח הפעם</h1>
@@ -92,4 +92,5 @@ export default defineComponent({
 });
 </script>
 
-<style></style>
+<style>
+</style>

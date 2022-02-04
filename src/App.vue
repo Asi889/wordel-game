@@ -107,7 +107,6 @@ import KeyBoard from "./components/KeyBoard.vue";
 import SettingsPage from "./components/SettingsPage.vue";
 import InfoPage from "./components/InfoPage.vue";
 import { getTodayWord, allWords } from "./utils/letters";
-import { deleteLetter } from "./functions/deleteLetter.jsx";
 import Popup from "./components/Popup.vue";
 import { board } from "./utils/board";
 import { changeColor } from "./functions/changeColor";
@@ -153,6 +152,8 @@ export default defineComponent({
   setup() {
     const wordoftheday = ref(getTodayWord());
     const allTheWord = reactive(allWords);
+    // console.log(wordoftheday)
+    // console.log("wordoftheday")
 
     const alphabet = reactive(alphab);
     const restOfLetters = reactive(restOfElphabet1);
@@ -223,7 +224,9 @@ export default defineComponent({
     const done = reactive({ done: false });
     const wiggle = ref(false) as any;
     const popUpValue = ref("");
+    const loadedfromlocalstorage = ref(undefined) as any;
     const gridImage = ref("") as any;
+    const firstTimer = ref(false) as any
     const activateWiggle = () => {
       wiggle.value = !wiggle.value;
     };
@@ -241,7 +244,6 @@ export default defineComponent({
       if (success.success === true) {
         return;
       }
-      // for(const letter of [...currentRow.value.letters].reverse()) {
       for (const letter of [...currentRow.value.letters].reverse()) {
         if (letter.letter) {
           letter.letter = "";
@@ -296,14 +298,15 @@ export default defineComponent({
       return;
     };
 
-    const changeKeyColor = () => {};
 
     const saveToLocalStorage = () => {
+      
       localStorage.setItem("date", today);
       localStorage.setItem("guesses", JSON.stringify(guesses));
     };
 
     const makeGuess = () => {
+     
       if (success.success === true) {
         return;
       }
@@ -345,8 +348,9 @@ export default defineComponent({
           guess.value = [];
 
           /////////////////////
-
-          saveToLocalStorage();
+          // if (loadedfromlocalstorage.value === false) {            
+            saveToLocalStorage();
+          // }
         }
 
         ///// Game over - No more guesses left ////
@@ -358,40 +362,39 @@ export default defineComponent({
 
     const loadfromLocalStorage = () => {
       const date = localStorage.getItem("date");
+      if (!date) {
+        firstTimer.value = true
+        loadedfromlocalstorage.value = true;
+      }
+
       // if (date !== today) {
       //   localStorage.removeItem("date");
       //   localStorage.removeItem("guesses");
       //   return;
       // }
+
       loadGuesses.value = JSON.parse(localStorage.getItem("guesses") as any);
-      console.log(loadGuesses);
-      // let worda = loadGuesses.shif
-      if (loadGuesses.value)
+      
+      if (loadGuesses.value){
+
         loadGuesses.value.forEach((word: any, index: any) => {
           guess.value = [...word.split("")];
           guess.value.forEach((char: any, index: any) => {
             enterKey({ key: char });
           });
 
-          // currentRow.value.letters.forEach((cahr: any) => {
-          //   guess.value.forEach((letter: any, index1: any) => {
-          //     if (!cahr.letter) {
-          //       cahr.letter = letter;
-          //     }
-          //   });
-          // });
           makeGuess();
         });
-      console.log(guess.value);
-      console.log("guess.value");
+        loadedfromlocalstorage.value = true;
+      }
+      
     };
-    // const addDate= ()=>{
+    
+    // const date = localStorage.getItem("date");
+    //   if (date) {
+    //     loadfromLocalStorage();
+    //   }
 
-    //   localStorage.setItem("date",today)
-    // }
-    // addDate()
-
-    // loadfromLocalStorage();
 
     document.body.addEventListener("keydown", function (event) {
       if (

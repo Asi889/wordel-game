@@ -42,7 +42,8 @@
     v-bind:class="{blueChar: gamerKeyBoard.active === true,}"
     @click="activateGamerMode"
   >
-    <svg class="w-5" viewBox="0 0 512 512">
+    <svg class="w-5" v-bind:class="{sunMode: gamerKeyBoard.active === true,}" viewBox="0 0 512 512">
+      
       <path d="M256 105.5c-83.9 0-152.2 68.3-152.2 152.2 0 83.9 68.3 152.2 152.2 152.2 83.9 0 152.2-68.3 152.2-152.2 0-84-68.3-152.2-152.2-152.2zm0 263.5c-61.4 0-111.4-50-111.4-111.4 0-61.4 50-111.4 111.4-111.4 61.4 0 111.4 50 111.4 111.4 0 61.4-50 111.4-111.4 111.4zM256 74.8c11.3 0 20.4-9.1 20.4-20.4v-23c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v23c0 11.3 9.1 20.4 20.4 20.4zM256 437.2c-11.3 0-20.4 9.1-20.4 20.4v22.9c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4v-22.9c0-11.2-9.1-20.4-20.4-20.4zM480.6 235.6h-23c-11.3 0-20.4 9.1-20.4 20.4 0 11.3 9.1 20.4 20.4 20.4h23c11.3 0 20.4-9.1 20.4-20.4 0-11.3-9.1-20.4-20.4-20.4zM54.4 235.6h-23c-11.3 0-20.4 9.1-20.4 20.4 0 11.3 9.1 20.4 20.4 20.4h22.9c11.3 0 20.4-9.1 20.4-20.4.1-11.3-9.1-20.4-20.3-20.4zM400.4 82.8L384.1 99c-8 8-8 20.9 0 28.9s20.9 8 28.9 0l16.2-16.2c8-8 8-20.9 0-28.9s-20.9-8-28.8 0zM99 384.1l-16.2 16.2c-8 8-8 20.9 0 28.9s20.9 8 28.9 0l16.2-16.2c8-8 8-20.9 0-28.9s-20.9-7.9-28.9 0zM413 384.1c-8-8-20.9-8-28.9 0s-8 20.9 0 28.9l16.2 16.2c8 8 20.9 8 28.9 0s8-20.9 0-28.9L413 384.1zM99 127.9c8 8 20.9 8 28.9 0s8-20.9 0-28.9l-16.2-16.2c-8-8-20.9-8-28.9 0s-8 20.9 0 28.9L99 127.9z"></path>
     </svg>
   </div>
@@ -85,7 +86,7 @@
 
 <script>
 import { reactive } from "@vue/reactivity";
-import { deleteLetter } from "../functions/deleteLetter.jsx";
+// import { deleteLetter } from "../functions/deleteLetter.jsx";
 import { alphab, restOfElphabet1 } from "../utils/letters";
 // import {enterKey } from "../functions/enterKey.jsx";
 
@@ -126,35 +127,9 @@ export default {
     const handleGuess = () => {
       makeGuess();
     };
-    const handleGamerMode =()=>{
-      // console.log("shubiiii");
-      // gamerKeyBoard.value = true
-    }
-    const changeColor = (lettere) => {
-      // console.log(computedGuess);
-      // console.log("computedGuess");
-      // if (computedGuess.includes(lettere)) {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
-      // console.log("wory");
-
-      splitedWord.forEach((letter) => {
-        if (lettere === letter) {
-          // console.log("true");
-          return true;
-        } else {
-          // console.log("false");
-          return false;
-        }
-      });
-    };
-    // console.log(currentRow);
-    // console.log(lettere);
-    // console.log("currentRow");
-
-    // });
+    
+   
+    
 
     return {
       word,
@@ -163,11 +138,9 @@ export default {
       handleGuess,
       enterKey,
       deleteKey,
-      changeColor,
       alphabet,
       restOfLetters,
       gamerKeyBoard,
-      handleGamerMode,
       activateGamerMode
     };
   },
@@ -229,5 +202,8 @@ export default {
 .orangeChar {
   box-shadow: 3px 3px 3px 3px #d99126a8;
   /* border: 3px 3px 3px 3px #e90e0ea8 */
+}
+.sunMode{
+  fill: red;
 }
 </style>

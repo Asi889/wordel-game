@@ -143,12 +143,12 @@ input:checked + .slider:before {
   color: #f8f1f1;
 }
 
-.slide-up {
+/* .slide-up {
   animation: animatebottom 1.4s;
   position: relative;
-  /* animation: SlideIn 10000ms linear;
+  animation: SlideIn 10000ms linear;
   z-index: 2000;
-  height: 100%; */
-}
+  height: 100%;
+} */
 
 </style>
