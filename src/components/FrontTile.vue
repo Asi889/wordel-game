@@ -1,27 +1,33 @@
 <template>
   <div
-    class="innerCard slotwrapper flip-card-front flex justify-center gap-1"
+    class="slotwrapper innerCard  flex gap-x-1 justify-center"
     v-bind:class="{
       wiggle: row.tried === true,
-      flipcardactive: flipit.flip === true,
     }"
     v-bind:id="'guess-' + rowIndex"
   >
     <div
       v-for="(char, index) in row.letters"
       v-bind:key="char.id"
-      class="flip-card-front grid items-center justify-center ffront border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center"
-      v-bind:id="'letter-' + rowIndex + '-' + ++index"
+      class=" flex innerCard flip-card-front  rid items-center justify-center"
       v-bind:class="{
-        darkModeRows: darkMode,
-        
-        active1: char.letter.length > 0,
-        inword: char.inWord === true,
-        inposition: char.rightPosition === true,
-        notInword: char.notInWord === true,
+        flipcardactive: char.flipped === true,
       }"
     >
-      {{ char.letter }}
+      <div
+        class="grid content-center ffront border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center"
+        v-bind:id="'letter-' + rowIndex + '-' + ++index"
+        v-bind:class="{
+          darkModeRows: darkMode,
+
+          active1: char.letter.length > 0,
+          inword: char.inWord === true,
+          inposition: char.rightPosition === true,
+          notInword: char.notInWord === true,
+        }"
+      >
+        {{ char.letter }}
+      </div>
     </div>
   </div>
 </template>
@@ -33,14 +39,21 @@ import { computed } from "vue";
 import { inputFocus } from "../functions/inputFocus.jsx";
 export default defineComponent({
   name: "FrontTile",
-  props: ["wiggle", "rowIndex", "row", "darkMode", "flipit", "testy", "flipTest"],
+  props: [
+    "wiggle",
+    "rowIndex",
+    "row",
+    "darkMode",
+    "flipit",
+    "testy",
+    "flipTest",
+  ],
   components: {},
   setup(props) {
     const { rowIndex, row, darkMode, flipit, wiggle, testy, flipTest } = props;
 
     const dictionary = getTodayWord();
     const isInWord = computed(() => {});
-    
 
     return { rowIndex, row, darkMode, flipit, wiggle, testy };
   },
@@ -48,7 +61,6 @@ export default defineComponent({
 </script>
 
 <style>
-
 .active1 {
   border: 2px solid grey !important;
   outline: none !important;

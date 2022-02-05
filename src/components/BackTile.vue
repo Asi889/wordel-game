@@ -2,10 +2,10 @@
 
 
   <div
-    class="innerCard backster flex slotwrapper justify-center gap-1"
+    class="innerCard flip-card-back backster flex slotwrapper justify-center gap-1"
     v-bind:class="{
       wiggle: row.tried === true,
-        flipcardactive: flipit.flip === true,
+        
       
     }"
     v-bind:id="'guess-' + rowIndex"
@@ -13,11 +13,11 @@
     <div
       v-for="(char, index) in row.letters"
       v-bind:key="char.id"
-      class="flip-card-back grid  items-center justify-center ffront border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center "
+      class=" grid  items-center justify-center ffront border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center "
       v-bind:id="'letter-' + rowIndex + '-' + ++index"
       v-bind:class="{
         darkModeRows: darkMode,
-        
+        flipcardactive: char.flipped === true,
         active1: char.letter.length > 0,
         inword: char.inWord === true,
         inposition: char.rightPosition === true,

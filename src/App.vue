@@ -50,7 +50,7 @@
           :flipTest="flipTest"
         />
 
-        <div class="mt-14 absolute flex flex-col gap-y-4 bottom-0 w-full">
+        <div class="mt-14 innerCard absolute flex flex-col gap-y-4 bottom-0 w-full">
           <BackTile
             v-for="(row, index) in word"
             v-bind:key="row.id"
@@ -176,6 +176,7 @@ export default defineComponent({
     });
 
     const word = reactive(board());
+    console.log({ word });
 
     const darkMode = ref(false);
     const flipit = reactive({ flip: false });
@@ -216,6 +217,16 @@ export default defineComponent({
     };
 
     const activateFlip = () => {
+      word.forEach((letter) => {
+        letter.letters.forEach((char) => {
+          if (char.letter.length) {
+            setTimeout(() => {
+              char.flipped = true;
+            }, 1000);
+          }
+          ///
+        });
+      });
       flipit.flip = !flipit.flip;
     };
     const activateTestFlip = () => {
@@ -223,7 +234,6 @@ export default defineComponent({
     };
 
     const splitedWord = computed(() => wordoftheday.value.split(""));
-    console.log({ splitedWord });
 
     const row = ref(guesses.length + 1);
     const guessNum = ref(0);
@@ -280,8 +290,6 @@ export default defineComponent({
         if (!letter.letter) {
           letter.letter = event.key;
           guess.value.push(event.key);
-          // console.log(guess.value);
-
           break;
         }
       }
@@ -343,9 +351,8 @@ export default defineComponent({
           currentRow.value.tried = true;
           currentRowIndex.value = currentRowIndex.value + 1;
           guessNum.value = guessNum.value + 1;
-         
 
-                activateFlip();
+          activateFlip();
           guess.value = [];
 
           /////////////////////
@@ -444,7 +451,7 @@ export default defineComponent({
       allLetters,
       gamerKeyBoard,
       activateGamerMode,
-      flipTest
+      flipTest,
     };
   },
 });
@@ -489,4 +496,10 @@ export default defineComponent({
 .sceneelementfadein {
   animation-name: fadeIn;
 }
+.innerCard {
+  transition: transform 1.3s;
+  transform-style: preserve-3d;
+  /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
+}
+
 </style>

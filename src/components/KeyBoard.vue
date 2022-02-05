@@ -77,7 +77,7 @@
     class="grid justify-center items-center w-12 h-12 text-black bg-gray-400 rounded placeholder:text-black keyboardInput"
     v-bind:class="{greenChar: gamerKeyBoard.active === true,}"
     value="Enter"
-    @click="activateGamerMode"
+    @click="handleGuess"
   >
     Enter
   </div>
