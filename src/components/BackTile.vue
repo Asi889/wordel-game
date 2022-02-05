@@ -1,21 +1,23 @@
 <template>
-<!-- <div class="relative"> -->
+
 
   <div
-    class="innerCard backster absolute slotwrapper flex justify-center gap-1"
+    class="innerCard backster flex slotwrapper justify-center gap-1"
     v-bind:class="{
       wiggle: row.tried === true,
-      flipcardactive: flipit.flip === true,
+        flipcardactive: flipit.flip === true,
+      
     }"
     v-bind:id="'guess-' + rowIndex"
   >
     <div
       v-for="(char, index) in row.letters"
       v-bind:key="char.id"
-      class="flip-card-back grid items-center justify-center ffront border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center "
+      class="flip-card-back grid  items-center justify-center ffront border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center "
       v-bind:id="'letter-' + rowIndex + '-' + ++index"
       v-bind:class="{
         darkModeRows: darkMode,
+        
         active1: char.letter.length > 0,
         inword: char.inWord === true,
         inposition: char.rightPosition === true,
@@ -25,7 +27,7 @@
       {{ char.letter }}
     </div>
   </div>
-<!-- </div> -->
+
 </template>
 
 <script lang="ts">
@@ -35,28 +37,22 @@ import { computed } from "vue";
 import { inputFocus } from "../functions/inputFocus.jsx";
 export default defineComponent({
   name: "BackTile",
-  props: ["wiggle", "rowIndex", "row", "darkMode", "flipit", "testy"],
+  props: ["wiggle", "rowIndex", "row", "darkMode", "flipit", "testy", "flipTest"],
   components: {},
   setup(props) {
-    const { rowIndex, row, darkMode, flipit, wiggle, testy } = props;
+    const { rowIndex, row, darkMode, flipit, wiggle, testy, flipTest } = props;
 
     const dictionary = getTodayWord();
     const isInWord = computed(() => {});
-    const back = ref(false);
+    
 
-    const focusNext = (e: any) => {
-      inputFocus(e);
-    };
-
-    return { focusNext, rowIndex, row, darkMode, flipit, wiggle, testy, back };
+    return {  rowIndex, row, darkMode, flipit, wiggle, testy };
   },
 });
 </script>
 
 <style>
-.back {
-  display: none;
-}
+
 .active1 {
   border: 2px solid grey !important;
   outline: none !important;
@@ -100,7 +96,7 @@ export default defineComponent({
 }
 
 .innerCard {
-  transition: transform 0.6s;
+  transition: transform 1.3s;
   transform-style: preserve-3d;
   /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
 }

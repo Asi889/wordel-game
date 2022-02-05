@@ -1,18 +1,20 @@
 <template>
   <div
-    class="innerCard slotwrapper flex justify-center gap-1"
+    class="innerCard slotwrapper flip-card-front flex justify-center gap-1"
     v-bind:class="{
       wiggle: row.tried === true,
+      flipcardactive: flipit.flip === true,
     }"
     v-bind:id="'guess-' + rowIndex"
   >
     <div
       v-for="(char, index) in row.letters"
       v-bind:key="char.id"
-      class="flip-card-front grid items-center justify-center ffront border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center rotate"
+      class="flip-card-front grid items-center justify-center ffront border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center"
       v-bind:id="'letter-' + rowIndex + '-' + ++index"
       v-bind:class="{
         darkModeRows: darkMode,
+        
         active1: char.letter.length > 0,
         inword: char.inWord === true,
         inposition: char.rightPosition === true,
@@ -31,28 +33,22 @@ import { computed } from "vue";
 import { inputFocus } from "../functions/inputFocus.jsx";
 export default defineComponent({
   name: "FrontTile",
-  props: ["wiggle", "rowIndex", "row", "darkMode", "flipit", "testy"],
+  props: ["wiggle", "rowIndex", "row", "darkMode", "flipit", "testy", "flipTest"],
   components: {},
   setup(props) {
-    const { rowIndex, row, darkMode, flipit, wiggle, testy } = props;
+    const { rowIndex, row, darkMode, flipit, wiggle, testy, flipTest } = props;
 
     const dictionary = getTodayWord();
     const isInWord = computed(() => {});
-    const back = ref(false);
+    
 
-    const focusNext = (e: any) => {
-      inputFocus(e);
-    };
-
-    return { focusNext, rowIndex, row, darkMode, flipit, wiggle, testy, back };
+    return { rowIndex, row, darkMode, flipit, wiggle, testy };
   },
 });
 </script>
 
 <style>
-.back {
-  display: none;
-}
+
 .active1 {
   border: 2px solid grey !important;
   outline: none !important;
@@ -96,7 +92,7 @@ export default defineComponent({
 }
 
 .innerCard {
-  transition: transform 0.6s;
+  transition: transform 1.3s;
   transform-style: preserve-3d;
   /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
 }
@@ -106,20 +102,19 @@ export default defineComponent({
   height: 300px;
   perspective: 1000px; */
 }
-.flip-card-front,
-.flip-card-back {
+.flip-card-front {
   /* position: absolute;
   width: 100%;
   height: 100%; */
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
 }
 
 .flip-card-back {
-  position: absolute;
+  /* position: absolute; */
   /* background-color: #2980b9;
   color: white; */
-  transform: rotateX(180deg);
+  /* transform: rotateX(180deg); */
 }
 
 .flipcardactive {

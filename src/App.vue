@@ -47,18 +47,23 @@
           :flipit="flipit"
           :darkMode="darkMode"
           :rowIndex="++index"
+          :flipTest="flipTest"
         />
-        <!-- <BackTile
-         v-for="(row, index) in word"
-          v-bind:key="row.id"
-          :wiggle="wiggle.value"
-          :row="row"
-          :currentRow="currentRow"
-          :testy="testy"
-          :flipit="flipit"
-          :darkMode="darkMode"
-          :rowIndex="++index"
-         /> -->
+
+        <div class="mt-14 absolute flex flex-col gap-y-4 bottom-0 w-full">
+          <BackTile
+            v-for="(row, index) in word"
+            v-bind:key="row.id"
+            :wiggle="wiggle.value"
+            :row="row"
+            :currentRow="currentRow"
+            :testy="testy"
+            :flipit="flipit"
+            :darkMode="darkMode"
+            :rowIndex="++index"
+            :flipTest="flipTest"
+          />
+        </div>
       </div>
 
       <div
@@ -174,6 +179,7 @@ export default defineComponent({
 
     const darkMode = ref(false);
     const flipit = reactive({ flip: false });
+    const flipTest = reactive({ testFlip: false });
 
     const currentRowIndex = ref(0) as any;
     const currentRow = computed(() => word[currentRowIndex.value]) as any;
@@ -212,6 +218,9 @@ export default defineComponent({
     const activateFlip = () => {
       flipit.flip = !flipit.flip;
     };
+    const activateTestFlip = () => {
+      flipTest.testFlip = !flipTest.testFlip;
+    };
 
     const splitedWord = computed(() => wordoftheday.value.split(""));
     console.log({ splitedWord });
@@ -226,7 +235,7 @@ export default defineComponent({
     const popUpValue = ref("");
     const loadedfromlocalstorage = ref(undefined) as any;
     const gridImage = ref("") as any;
-    const firstTimer = ref(false) as any
+    const firstTimer = ref(false) as any;
     const activateWiggle = () => {
       wiggle.value = !wiggle.value;
     };
@@ -236,9 +245,8 @@ export default defineComponent({
       gamerKeyBoard.active = !gamerKeyBoard.active;
     };
     // setTimeout(() => {
-    //   gamerKeyBoard.active = true
+    //   activateFlip();
     // }, 3000);
-    const gamerMode = () => {};
 
     const deleteKey = () => {
       if (success.success === true) {
@@ -251,12 +259,6 @@ export default defineComponent({
           break;
         }
       }
-    };
-
-    const colors = {
-      green: "🟩",
-      white: "⬜",
-      yellow: "🟨",
     };
 
     const createGridImage = () => {
@@ -298,15 +300,12 @@ export default defineComponent({
       return;
     };
 
-
     const saveToLocalStorage = () => {
-      
       localStorage.setItem("date", today);
       localStorage.setItem("guesses", JSON.stringify(guesses));
     };
 
     const makeGuess = () => {
-     
       if (success.success === true) {
         return;
       }
@@ -344,12 +343,14 @@ export default defineComponent({
           currentRow.value.tried = true;
           currentRowIndex.value = currentRowIndex.value + 1;
           guessNum.value = guessNum.value + 1;
-          activateFlip();
+         
+
+                activateFlip();
           guess.value = [];
 
           /////////////////////
-          // if (loadedfromlocalstorage.value === false) {            
-            saveToLocalStorage();
+          // if (loadedfromlocalstorage.value === false) {
+          saveToLocalStorage();
           // }
         }
 
@@ -363,7 +364,7 @@ export default defineComponent({
     const loadfromLocalStorage = () => {
       const date = localStorage.getItem("date");
       if (!date) {
-        firstTimer.value = true
+        firstTimer.value = true;
         loadedfromlocalstorage.value = true;
       }
 
@@ -374,9 +375,8 @@ export default defineComponent({
       // }
 
       loadGuesses.value = JSON.parse(localStorage.getItem("guesses") as any);
-      
-      if (loadGuesses.value){
 
+      if (loadGuesses.value) {
         loadGuesses.value.forEach((word: any, index: any) => {
           guess.value = [...word.split("")];
           guess.value.forEach((char: any, index: any) => {
@@ -387,14 +387,12 @@ export default defineComponent({
         });
         loadedfromlocalstorage.value = true;
       }
-      
     };
-    
+
     // const date = localStorage.getItem("date");
     //   if (date) {
     //     loadfromLocalStorage();
     //   }
-
 
     document.body.addEventListener("keydown", function (event) {
       if (
@@ -446,6 +444,7 @@ export default defineComponent({
       allLetters,
       gamerKeyBoard,
       activateGamerMode,
+      flipTest
     };
   },
 });
