@@ -9,10 +9,9 @@
       v-bind:class="{darkModeRows: darkMode , active1: char.letter.length > 0, inword: char.inWord === true, inposition: char.rightPosition === true, notInword: char.notInWord === false, veritaclfliph: flipit.value }"
       type="text"
       v-model="char.letter"
-      v-on:keydown="focusNext"
-      @change="focusNext"
       :disabled="row.tried === false"
       dir="rtl"
+      @input="setFocus(char)"
     />
   </div>
 </template>

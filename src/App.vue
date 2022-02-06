@@ -7,11 +7,7 @@
       v-if="layout.main"
       class="flex flex-col gap-y-4 w-full max-w-lg mx-auto h-[100vh] justify-around"
     >
-      <TopBar
-        :layout="layout"
-        :darkMode="darkMode"
-        :toggleDarkMode="toggleDarkMode"
-      />
+      <TopBar :layout="layout" :darkMode="darkMode" :toggleDarkMode="toggleDarkMode" />
 
       <Success
         v-if="success.success === true"
@@ -454,6 +450,12 @@ export default defineComponent({
       flipTest,
     };
   },
+  mounted() {
+    const firstInput = document.querySelector(`#input-1-1`) as HTMLInputElement;
+    if(firstInput){
+      firstInput.focus()
+    }
+  }
 });
 </script>
 
