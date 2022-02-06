@@ -1,5 +1,8 @@
 <template>
-  <div class="settings-wrapper pt-3 w-full flex flex-col gap-y-4" v-bind:class="{settingsWrapperDark: darkMode}">
+  <div
+    class="info-wrapper pt-3 w-full flex flex-col gap-y-4  scene_element scene_element--fadeinup"
+    v-bind:class="{ settingsWrapperDark: darkMode, fadeOut: fadeout1.value }"
+  >
     <div class="flex justify-between">
       <span></span>
       <h1 class="mx-auto text-xl">איך משחקים</h1>
@@ -28,12 +31,7 @@
               <div
                 class="front w-[70px] h-[70px] border-2 text-white bg-[#6bc26b] border-gray-500 flex justify-center items-center text-5xl pb-2 font-bold"
               >
-                א
-              </div>
-              <div
-                class="back w-[70px] h-[70px] border-2 text-white bg-[#6bc26b] border-gray-500 flex justify-center items-center text-5xl pb-2 font-bold"
-              >
-                א
+                ב
               </div>
             </div>
           </div>
@@ -58,7 +56,7 @@
             י
           </div>
         </div>
-        <p>האות א נמצא במילה ובמיקום הנכון</p>
+        <p>האות ב נמצא במילה ובמיקום הנכון</p>
       </div>
 
       <!-- //////// -->
@@ -75,12 +73,7 @@
           >
             <div class="flipper">
               <div
-                class="front w-[70px] h-[70px] border-2 text-white bg-[#d2b35c] border-gray-500 flex justify-center items-center text-5xl pb-2 font-bold"
-              >
-                ג
-              </div>
-              <div
-                class="back w-[70px] h-[70px] border-2 text-white bg-[#d2b35c] border-gray-500 flex justify-center items-center text-5xl pb-2 font-bold"
+                class="veritacl-flip w-[70px] h-[70px] border-2 text-white bg-[#d2b35c] border-gray-500 flex justify-center items-center text-5xl pb-2 font-bold"
               >
                 ג
               </div>
@@ -127,11 +120,6 @@
               >
                 ט
               </div>
-              <div
-                class="back w-[70px] h-[70px] border-2 text-white bg-gray-500 border-gray-500 flex justify-center items-center text-5xl pb-2 font-bold"
-              >
-                ט
-              </div>
             </div>
           </div>
           <div
@@ -145,7 +133,7 @@
             נ
           </div>
         </div>
-        <p>האות ט לא נמצא במילה </p>
+        <p>האות ט לא נמצא במילה</p>
       </div>
       <div class="font-bold">בכל יום יופיע וורדל חדש ליפאנוח!</div>
     </div>
@@ -153,98 +141,113 @@
 </template>
 
 <script>
+import { ref } from '@vue/reactivity';
 export default {
-  props: ["layout", "darkMode"],
+  props: ["layout", "darkMode", "fadeEff"],
   setup(props) {
-    const { layout, darkMode } = props;
+    const { layout, darkMode, fadeEff} = props;
+    let fadeout1= ref(false)
     const handlClick = () => {
       layout.main = true;
       layout.settings = false;
       layout.info = false;
+      fadeout1= !fadeout1
+      // fadeEff()
     };
 
-    return { handlClick, darkMode };
+    return { handlClick, darkMode,fadeout1 };
   },
 };
 </script>
 
 <style>
-@-webkit-keyframes flip {
-  from {
-    -webkit-transform: rotateX(0deg);
-    transform: rotateX(0deg);
-  }
-  to {
-    -webkit-transform: rotateX(360deg);
-    transform: rotateX(360deg);
-  }
+.info-wrapper {
+  direction: rtl;
+  height: 0px;
 }
 
-@keyframes flip {
-  from {
-    -webkit-transform: rotateX(0deg);
-    transform: rotateX(0deg);
-  }
-  to {
-    -webkit-transform: rotateX(360deg);
-    transform: rotateX(360deg);
-  }
+.veritacl-flip {
+  animation-name: vertical-rotate;
+  animation-duration: 3.5s;
 }
-
-/* entire container, keeps perspective */
-.flip-container {
-  /* perspective: 1000; */
-}
-
-.flip-container,
-.front,
-.back {
-  width: 70px;
-  height: 70px;
-}
-
-/* flip speed goes here */
-.flipper {
-  transition: 0.6s;
-  transform-style: preserve-3d;
-  position: relative;
-  -webkit-animation-name: flip;
-  animation-name: flip;
-  -webkit-animation-duration: 0.6s;
-  animation-duration: 0.6s;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-delay: 3s;
-  animation-delay: 3s;
-}
-
-/* hide back of pane during swap */
-.front,
-.back {
-  backface-visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-/* front pane, placed above back */
 .front {
-  /* display: flex;
-  justify-content: center;
-    align-items: center;
-    border: 1px solid black; */
-  /* background: blue; */
-  /* z-index: 2; */
-  /* for firefox 31 */
-  transform: rotateX(0deg);
+  animation-name: rotate;
+  animation-duration: 2s;
 }
 
-/* back, initially hidden pane */
-.back {
-  transform: rotateX(180deg);
-  background: green;
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotateY(700deg);
+  }
+}
+@keyframes vertical-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotateX(700deg);
+  }
 }
 .settingsWrapperDark {
-  color: white
+  color: white;
 }
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(50%, 70%, 0);
+  }
+  50% {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    /* transform: none; */
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+  /** Basic styles for an animated element */
+  .scene_element {
+    /* animation-duration: 1.25s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: ease-in; */
+
+  }
+  .fadeOut {
+    /* animation-direction: alternate-reverse; */
+  }
+
+  
+
+  /** An element that fades in and slides up */
+  .scene_element--fadeinup {
+    animation-name: fadeInUp;
+  }
+
+  /** An element that fades in and slides from the right */
+  .scene_element--fadeinright {
+    animation-name: fadeInRight;
+  }
+
+
+
+
 </style>
