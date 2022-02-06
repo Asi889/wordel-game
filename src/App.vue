@@ -107,7 +107,7 @@ import Row from "./components/Row.vue";
 import KeyBoard from "./components/KeyBoard.vue";
 import SettingsPage from "./components/SettingsPage.vue";
 import InfoPage from "./components/InfoPage.vue";
-import { getTodayWord, allWords } from "./utils/letters";
+import { getTodayWord, allWords } from "./utils/words";
 import Popup from "./components/Popup.vue";
 import { board } from "./utils/board";
 import { changeColor } from "./functions/changeColor";

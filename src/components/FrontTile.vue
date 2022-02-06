@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { getTodayWord } from "../utils/letters";
+import { getTodayWord } from "../utils/words";
 import { defineComponent, reactive, ref } from "@vue/runtime-core";
 import { computed } from "vue";
 import { inputFocus } from "../functions/inputFocus.jsx";
