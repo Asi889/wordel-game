@@ -1,3 +1,16 @@
+export function getTodayWord():string{
+    // const index = 0;
+    // return allWords[index]
+    const now = new Date()
+  const start = new Date(2022, 0, 0)
+  const diff = Number(now) - Number(start)
+  let day = Math.floor(diff / (1000 * 60 * 60 * 24))
+  while (day > allWords.length) {
+    day -= allWords.length
+  }
+  return allWords[day]
+}
+
 export const alphab =[
       
   {letter: "א", position:"", color: "blue"},
@@ -22,3 +35,16 @@ export const alphab =[
 
 export const restOfElphabet1 = [{letter: "ת", position:"", color: "purpule"},{letter: "ש", position:"", color: "purpule"},{letter: "ר", position:"", color: "red"},{letter: "ק", position:"", color: "purpule"},]
 
+
+export const allWords =[
+    'אנאלי',
+    'בנאלי',
+    'שלמנו',
+    'יכלנו',
+    'היותו',
+    'אימהו',
+    'הלכנו',
+    'נרגלה',
+    'רוגלך',
+    'מאפיה',
+]
