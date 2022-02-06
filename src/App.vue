@@ -50,7 +50,9 @@
           :flipTest="flipTest"
         />
 
-        <div class="mt-14 innerCard absolute flex flex-col gap-y-4 bottom-0 w-full">
+        <div
+          class="mt-14 innerCard absolute flex flex-col gap-y-4 bottom-0 w-full"
+        >
           <BackTile
             v-for="(row, index) in word"
             v-bind:key="row.id"
@@ -102,7 +104,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, onMounted, reactive, ref } from "vue";
 import TopBar from "./components/TopBar.vue";
 import FirstSlot from "./components/FirstSlot.vue";
 import Statistics from "./components/Statistics.vue";
@@ -184,6 +186,7 @@ export default defineComponent({
 
     const currentRowIndex = ref(0) as any;
     const currentRow = computed(() => word[currentRowIndex.value]) as any;
+    const currentRow1 = computed(() => word[currentRowIndex.value - 1]) as any;
     const guesses = reactive([]) as any;
     const loadGuesses = ref("") as any;
     const guess = ref([]) as any;
@@ -217,17 +220,17 @@ export default defineComponent({
     };
 
     const activateFlip = () => {
-      word.forEach((letter) => {
-        letter.letters.forEach((char) => {
-          if (char.letter.length) {
-            setTimeout(() => {
-              char.flipped = true;
-            }, 1000);
-          }
-          ///
-        });
+      // word.forEach((letter) => {
+      currentRow1.value.letters.map((char: any) => {
+        // if (char.letter.length) {
+        setTimeout(() => {
+          char.flipped = true;
+        }, 1000);
+        // }
+        ///
+        // });
       });
-      flipit.flip = !flipit.flip;
+      // flipit.flip = !flipit.flip;
     };
     const activateTestFlip = () => {
       flipTest.testFlip = !flipTest.testFlip;
@@ -243,7 +246,8 @@ export default defineComponent({
     const done = reactive({ done: false });
     const wiggle = ref(false) as any;
     const popUpValue = ref("");
-    const loadedfromlocalstorage = ref(undefined) as any;
+    const loadedfromlocalstorage = ref(false) as any;
+    const loadedfromlocalstorage11 = ref(true) as any;
     const gridImage = ref("") as any;
     const firstTimer = ref(false) as any;
     const activateWiggle = () => {
@@ -289,7 +293,9 @@ export default defineComponent({
       for (const letter of currentRow.value.letters) {
         if (!letter.letter) {
           letter.letter = event.key;
+          // if (loadedfromlocalstorage.value === false) {
           guess.value.push(event.key);
+          // }
           break;
         }
       }
@@ -314,6 +320,8 @@ export default defineComponent({
     };
 
     const makeGuess = () => {
+      console.log(computedGuess.value);
+      console.log("computedGuess.value");
       if (success.success === true) {
         return;
       }
@@ -324,6 +332,9 @@ export default defineComponent({
 
       /////////// Not in the database ////////////
       if (!allTheWord.includes(computedGuess.value)) {
+        console.log(computedGuess.value);
+        console.log("computedGuess.value");
+
         handlesPopUp("לא במאגר");
         return;
       }
@@ -356,8 +367,10 @@ export default defineComponent({
           guess.value = [];
 
           /////////////////////
-          // if (loadedfromlocalstorage.value === false) {
-          saveToLocalStorage();
+          // if (loadedfromlocalstorage11.value === false) {
+            console.log("lodedddededed");
+
+            saveToLocalStorage();
           // }
         }
 
@@ -369,11 +382,13 @@ export default defineComponent({
     };
 
     const loadfromLocalStorage = () => {
+      loadGuesses.value = JSON.parse(localStorage.getItem("guesses") as any);
+
       const date = localStorage.getItem("date");
-      if (!date) {
-        firstTimer.value = true;
-        loadedfromlocalstorage.value = true;
-      }
+      // if (!date) {
+      //   firstTimer.value = true;
+      //   loadedfromlocalstorage.value = true;
+      // }
 
       // if (date !== today) {
       //   localStorage.removeItem("date");
@@ -381,25 +396,39 @@ export default defineComponent({
       //   return;
       // }
 
-      loadGuesses.value = JSON.parse(localStorage.getItem("guesses") as any);
-
+      // debugger
       if (loadGuesses.value) {
         loadGuesses.value.forEach((word: any, index: any) => {
           guess.value = [...word.split("")];
           guess.value.forEach((char: any, index: any) => {
-            enterKey({ key: char });
+            for (const letter of currentRow.value.letters) {
+              if (!letter.letter) {
+                letter.letter = char;
+                return
+                // if (loadedfromlocalstorage.value === false) {
+                // }
+              }
+                // return;
+            }
+            currentRowIndex.value = currentRowIndex.value + 1;
+            guessNum.value = guessNum.value + 1;
+          changeColor(currentRow, wordoftheday, splitedWord);
+          changeColorKeyBoard(computedKeyBoard, wordoftheday, splitedWord);
+            return
           });
-
-          makeGuess();
+          // return
         });
-        loadedfromlocalstorage.value = true;
       }
+      // loadedfromlocalstorage.value = true;
+      // loadedfromlocalstorage11.value = false;
     };
 
-    // const date = localStorage.getItem("date");
-    //   if (date) {
-    //     loadfromLocalStorage();
-    //   }
+    const date = localStorage.getItem("date");
+    // if ((loadedfromlocalstorage.value11 = true)) {
+      // }
+    onMounted(()=>{
+      loadfromLocalStorage();
+    })
 
     document.body.addEventListener("keydown", function (event) {
       if (
@@ -496,10 +525,10 @@ export default defineComponent({
 .sceneelementfadein {
   animation-name: fadeIn;
 }
+
 .innerCard {
   transition: transform 1.3s;
   transform-style: preserve-3d;
   /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
 }
-
 </style>

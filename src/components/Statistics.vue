@@ -11,7 +11,7 @@
         <h2 class="justify-self-center text-2xl pt-3">מילת היום היתה</h2>
       </div>
       <h2 class="justify-self-end text-xl pt-4">:שתפו את התוצאה</h2>
-      <a href="#"  @click="handleShare()">
+      <a href="#" @click="handleShare()">
         <div
           class="flex bg-green-500 rounded-2xl py-4 px-4 mx-5 mt-4 justify-around"
         >
@@ -66,6 +66,8 @@
 
       <div class="justify-self-center pt-4">
         <h1 class="text-2xl">המילה הבאה העוד</h1>
+        <!-- <CountDown :timeLeft="timeLeft" /> -->
+        <Timer :timeLeft="timeLeft" />
         <h1>x זמן</h1>
       </div>
     </div>
@@ -73,24 +75,36 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from "vue";
-import { copyResult } from "../functions/copyResult"
+import { computed, defineComponent, onMounted, reactive, ref } from "vue";
+import { copyResult } from "../functions/copyResult";
+// import CountDown from "./CountDown.vue"
+import Timer from "./Timer.vue";
 
 export default defineComponent({
   name: "Statistics",
-  components: {},
+  components: { Timer },
   props: ["gridImage", "wordoftheday", "handlesPopUp"],
   setup(props) {
     const { gridImage, wordoftheday, handlesPopUp } = props as any;
-    const handleShare = ()=>{
-        copyResult(gridImage)
-        handlesPopUp("הועתק", )
-    }
-    
-    return { gridImage, wordoftheday, handleShare };
+    const timeLimit = ref(20) as any;
+    const timePassed = ref(0) as any;
+    const timeLeft = computed(() =>  timeLimit.value - timePassed.value) 
+    const timerInterval = ref(null) as any;
+    const startTimer = () => {
+      timerInterval.value = setInterval(() => (timePassed.value += 1),1000);
+    };
+    const handleShare = () => {
+      copyResult(gridImage);
+      handlesPopUp("הועתק");
+    };
+    onMounted(() => {
+      startTimer();
+      console.log("im monted bitches");
+    });
+
+    return { gridImage, wordoftheday, handleShare, timeLeft };
   },
 });
 </script>
 
-<style>
-</style>
+<style></style>

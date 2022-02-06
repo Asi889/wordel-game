@@ -1,6 +1,6 @@
 <template>
   <div
-    class="slotwrapper innerCard  flex gap-x-1 justify-center"
+    class="slotwrapper innerCard   flex gap-x-1 justify-center"
     v-bind:class="{
       wiggle: row.tried === true,
     }"
@@ -9,13 +9,13 @@
     <div
       v-for="(char, index) in row.letters"
       v-bind:key="char.id"
-      class=" flex innerCard flip-card-front  rid items-center justify-center"
+      class="innerCard flex flip-card-front items-center justify-center"
       v-bind:class="{
-        flipcardactive: char.flipped === true,
       }"
     >
+        <!-- flipcardactive: char.flipped === true, -->
       <div
-        class="grid content-center ffront border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center"
+        class="grid  content-center ffront border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center"
         v-bind:id="'letter-' + rowIndex + '-' + ++index"
         v-bind:class="{
           darkModeRows: darkMode,
@@ -109,7 +109,7 @@ export default defineComponent({
   /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
 }
 .flip-card {
-  background-color: transparent;
+  /* background-color: transparent; */
   /* width: 300px;
   height: 300px;
   perspective: 1000px; */
@@ -118,8 +118,8 @@ export default defineComponent({
   /* position: absolute;
   width: 100%;
   height: 100%; */
-  -webkit-backface-visibility: hidden !important;
-  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .flip-card-back {

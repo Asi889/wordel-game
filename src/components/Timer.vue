@@ -15,22 +15,25 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { computed } from "@vue/reactivity";
+import { defineComponent } from "@vue/runtime-core";
+
 export default defineComponent( {
-  name: "CountDown",
+  name: "Timer",
   props: ["timeLeft"],
   components: {},
   setup(props) {
-    const { timeLeft } = props;
+    const { timeLeft } = props as any;
     const formattedTimeLeft = computed(() => {
-      const timeLeft1 = timeLeft;
-      const minutes = Math.floor(timeLeft1 / 60);
-      let seconds = timeLeft1 % 60;
+      const timeLeft1 = timeLeft as any;
+      const minutes = Math.floor(timeLeft1 / 60) as any;
+      let seconds = timeLeft1 % 60 as any;
       if (seconds < 10) {
         seconds = `0${seconds}`;
       }
-      return `${minutes}:${seconds}`;
-    });
+      return `${seconds}:${minutes}`;
+    }) as any;
     return {formattedTimeLeft}
   },
 });
@@ -71,5 +74,6 @@ export default defineComponent( {
     /* Sort of an arbitrary number; adjust to your liking */
     font-size: 48px;
   }
+  
 }
 </style>

@@ -2,28 +2,25 @@
 
 
   <div
-    class="innerCard flip-card-back backster flex slotwrapper justify-center gap-1"
+    class="innerCard backster  flex slotwrapper justify-center gap-1"
     v-bind:class="{
-      wiggle: row.tried === true,
-        
-      
     }"
     v-bind:id="'guess-' + rowIndex"
   >
     <div
       v-for="(char, index) in row.letters"
       v-bind:key="char.id"
-      class=" grid  items-center justify-center ffront border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center "
+      class=" grid flip-card-back  items-center justify-center ffront border-2 border-gray-400 w-16 h-16 inputF text-3xl font-bold text-center "
       v-bind:id="'letter-' + rowIndex + '-' + ++index"
       v-bind:class="{
         darkModeRows: darkMode,
-        flipcardactive: char.flipped === true,
         active1: char.letter.length > 0,
         inword: char.inWord === true,
         inposition: char.rightPosition === true,
         notInword: char.notInWord === true,
       }"
     >
+        <!-- flipcardactive: char.flipped === true, -->
       {{ char.letter }}
     </div>
   </div>
@@ -74,14 +71,14 @@ export default defineComponent({
   transform: rotateY(180deg); */
 }
 .inposition {
-  background-color: rgb(107, 194, 107) !important;
-  color: white !important;
+  background-color: rgb(107, 194, 107);
+  color: white ;
   /* -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg); */
 }
 .notInword {
-  background-color: gray !important;
-  color: white !important;
+  background-color: gray ;
+  color: white ;
 }
 .darkModeRows {
   background-color: #121213;
@@ -119,11 +116,11 @@ export default defineComponent({
   /* position: absolute; */
   /* background-color: #2980b9;
   color: white; */
-  transform: rotateX(180deg);
+  transform: rotateY(180deg);
 }
 
 .flipcardactive {
-  transform: rotateX(180deg);
+  transform: rotateY(180deg);
 }
 
 @keyframes vertical-rotate {
