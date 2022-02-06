@@ -32,7 +32,7 @@
 
 <script>
 import { reactive } from "@vue/reactivity";
-import { getTodayWord } from '@/utils/letters';
+import { getTodayWord } from '@/utils/words';
 
 export default {
   props: ["attempts", "word1", "darkMode"],
@@ -70,11 +70,11 @@ export default {
       const emptyRow = slots.find((slot) => slot.id == foundd.id);
       const testyy = [...emptyRow.children];
       const emptyInput = testyy.find((input) => input.value === "");
-      
+
       word1.map((wordObj) => {
         wordObj.letters.map((letter) => {
-          if(wordObj.id == emptyRow.id && letter.id == emptyInput.id )
-          letter.letter = e.target.value;
+          if (wordObj.id == emptyRow.id && letter.id == emptyInput.id)
+            letter.letter = e.target.value;
         });
       });
       emptyInput.value = e.target.value;
@@ -89,7 +89,7 @@ export default {
       // }
     };
 
-    const dictionary =getTodayWord();
+    const dictionary = getTodayWord();
 
     const checkWord = () => {
       const firstRow = word1.find(
@@ -129,5 +129,4 @@ export default {
 .symble {
   color: red;
 }
-
 </style>

@@ -44,7 +44,7 @@ import FirstSlot from "./components/FirstSlot.vue";
 import KeyBoard from "./components/KeyBoard.vue";
 import SettingsPage from "./components/SettingsPage.vue";
 import InfoPage from "./components/InfoPage.vue";
-import { getTodayWord } from "./utils/letters";
+import { getTodayWord } from "./utils/words";
 import { currentInput } from "./state/focus";
 interface Attemps {
   first: boolean;
