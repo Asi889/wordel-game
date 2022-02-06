@@ -86,7 +86,6 @@
 
 <script>
 import { reactive } from "@vue/reactivity";
-import { getTodayWord } from '@/utils/words';
 // import { deleteLetter } from "../functions/deleteLetter.jsx";
 import { alphab, restOfElphabet1 } from "../utils/letters";
 // import {enterKey } from "../functions/enterKey.jsx";
