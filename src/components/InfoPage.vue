@@ -143,9 +143,9 @@
 <script>
 import { ref } from '@vue/reactivity';
 export default {
-  props: ["layout", "darkMode", "fadeEff"],
+  props: ["layout", "darkMode"],
   setup(props) {
-    const { layout, darkMode, fadeEff} = props;
+    const { layout, darkMode} = props;
     let fadeout1= ref(false)
     const handlClick = () => {
       layout.main = true;
@@ -224,29 +224,7 @@ export default {
 }
 
 
-  /** Basic styles for an animated element */
-  .scene_element {
-    /* animation-duration: 1.25s;
-    transition-timing-function: ease-in;
-    animation-fill-mode: ease-in; */
-
-  }
-  .fadeOut {
-    /* animation-direction: alternate-reverse; */
-  }
-
   
-
-  /** An element that fades in and slides up */
-  .scene_element--fadeinup {
-    animation-name: fadeInUp;
-  }
-
-  /** An element that fades in and slides from the right */
-  .scene_element--fadeinright {
-    animation-name: fadeInRight;
-  }
-
 
 
 

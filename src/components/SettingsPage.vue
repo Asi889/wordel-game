@@ -100,7 +100,6 @@ export default {
   right: 0;
   bottom: 0;
   background-color: #7e7979;
-  /* background-color: #63aa5d; */
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -119,7 +118,6 @@ export default {
 
 input:checked + .slider {
   background-color: #63aa5d;
-  /* background-color: #7e7979; */
 }
 
 input:focus + .slider {
@@ -143,12 +141,6 @@ input:checked + .slider:before {
   color: #f8f1f1;
 }
 
-/* .slide-up {
-  animation: animatebottom 1.4s;
-  position: relative;
-  animation: SlideIn 10000ms linear;
-  z-index: 2000;
-  height: 100%;
-} */
+
 
 </style>

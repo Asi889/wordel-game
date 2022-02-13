@@ -1,7 +1,7 @@
 <template>
   <div
     class="appWrapper w-full h-full scene_element bg-[#f6f6f6]"
-    v-bind:class="{ appDarkmode: darkMode, sceneelementfadein: fadeIn }"
+    v-bind:class="{ appDarkmode: darkMode }"
   >
     <div
       v-if="layout.main"
@@ -17,72 +17,46 @@
         v-if="success.success === true"
         :gridImage="gridImage"
         :handlesPopUp="handlesPopUp"
+        :theDate="theDate"
       />
       <Statistics
         v-if="statistics.statistics === true"
         :gridImage="gridImage"
         :wordoftheday="wordoftheday"
         :handlesPopUp="handlesPopUp"
+        :theDate="theDate"
       />
-      <div class="mt-14 relative flex flex-col gap-y-4">
-        <Popup v-if="testy.wiggle === true" :popUpValue="popUpValue" />
-        <!-- <Row
-          v-for="(row, index) in word"
-          v-bind:key="row.id"
-          :wiggle="wiggle.value"
-          :row="row"
-          :currentRow="currentRow"
-          :testy="testy"
-          :flipit="flipit"
-          :darkMode="darkMode"
-          :rowIndex="++index"
-        /> -->
+      <div
+        class="mt-14 relative flex flex-col gap-y-4"
+        v-bind:class="{
+          'opacity-50': statistics.statistics || success.success,
+        }"
+      >
+        <Popup v-if="wiggle.wiggle === true" :popUpValue="popUpValue" />
+
         <FrontTile
           v-for="(row, index) in word"
           v-bind:key="row.id"
-          :wiggle="wiggle.value"
           :row="row"
           :currentRow="currentRow"
-          :testy="testy"
-          :flipit="flipit"
+          :wiggle="wiggle"
           :darkMode="darkMode"
           :rowIndex="++index"
-          :flipTest="flipTest"
         />
-
-        <div
-          class="mt-14 innerCard absolute flex flex-col gap-y-4 bottom-0 w-full"
-        >
-          <BackTile
-            v-for="(row, index) in word"
-            v-bind:key="row.id"
-            :wiggle="wiggle.value"
-            :row="row"
-            :currentRow="currentRow"
-            :testy="testy"
-            :flipit="flipit"
-            :darkMode="darkMode"
-            :rowIndex="++index"
-            :flipTest="flipTest"
-          />
-        </div>
       </div>
 
       <div
         class="flex flex-wrap gap-2 justify-center KeyBoardWrapper"
-        v-bind:class="{ darkModeKeyboard: darkMode }"
+        v-bind:class="{
+          darkModeKeyboard: darkMode,
+          'opacity-50': statistics.statistics || success.success,
+        }"
       >
         <KeyBoard
-          :enterKey="enterKey"
-          :deleteKey="deleteKey"
           :makeGuess="makeGuess"
-          :word="word"
-          :darkMode="darkMode"
-          :activateFlip="activateFlip"
-          :flipit="flipit"
-          :splitedWord="splitedWord"
           :gamerKeyBoard="gamerKeyBoard"
-          :activateGamerMode="activateGamerMode"
+          :removeChar="removeChar"
+          :enterKey="enterKey"
         />
       </div>
     </div>
@@ -93,35 +67,36 @@
         :darkMode="darkMode"
         :toggleDarkMode="toggleDarkMode"
       />
-      <InfoPage
-        v-if="layout.info"
-        :layout="layout"
-        :darkMode="darkMode"
-        :fadeEff="fadeEff"
-      />
+      <InfoPage v-if="layout.info" :layout="layout" :darkMode="darkMode" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, reactive, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  onBeforeMount,
+  onMounted,
+  reactive,
+  ref,
+} from "vue";
 import TopBar from "./components/TopBar.vue";
-import FirstSlot from "./components/FirstSlot.vue";
 import Statistics from "./components/Statistics.vue";
 import Success from "./components/Success.vue";
-import Row from "./components/Row.vue";
 import KeyBoard from "./components/KeyBoard.vue";
 import SettingsPage from "./components/SettingsPage.vue";
 import InfoPage from "./components/InfoPage.vue";
-import { getTodayWord, allWords } from "./utils/letters";
+import { getTodayWord, getlAllWords, getDate } from "./utils/words";
 import Popup from "./components/Popup.vue";
 import { board } from "./utils/board";
-import { changeColor } from "./functions/changeColor";
-import { changeColorKeyBoard } from "./functions/changeColorKeyBoard";
 import FrontTile from "./components/FrontTile.vue";
-import BackTile from "./components/BackTile.vue";
 import { alphab, restOfElphabet1 } from "./utils/letters";
-
+import { makeguess2 } from "./functions/makeguess2";
+import { deleteKey } from "./functions/deleteKey";
+import { keyEnter } from "./functions/keyEnter";
+import { handlePopUp } from "./functions/handlePopUp";
+import { loadFromStorage } from "./functions/loadFromStorage";
 interface Attemps {
   first: boolean;
   seconde: boolean;
@@ -145,51 +120,44 @@ export default defineComponent({
   name: "App",
   components: {
     TopBar,
-    FirstSlot,
     KeyBoard,
     SettingsPage,
     InfoPage,
-    Row,
     Popup,
     Statistics,
     Success,
     FrontTile,
-    BackTile,
   },
   setup() {
-    const wordoftheday = ref(getTodayWord());
-    const allTheWord = reactive(allWords);
-    // console.log(wordoftheday)
-    // console.log("wordoftheday")
-
-    const alphabet = reactive(alphab);
-    const restOfLetters = reactive(restOfElphabet1);
+    const wordoftheday1 = ref(getTodayWord()) as any;
+    const wordoftheday = ref(wordoftheday1.value.word) as any;
+    const allTheWord = getlAllWords();
+    const theDate = ref(wordoftheday1.value.date);
+    const word = ref(board());
     const allLetters = reactive([...alphab, ...restOfElphabet1]);
-
     const layout = reactive({
       settings: false,
       info: false,
       main: true,
     }) as Layout;
-
-    const fadeIn = ref(false as any);
-    const fadeEff = computed(() => {
-      fadeIn.value = !fadeIn.value;
-    });
-
-    const word = reactive(board());
-    console.log({ word });
-
     const darkMode = ref(false);
-    const flipit = reactive({ flip: false });
-    const flipTest = reactive({ testFlip: false });
-
     const currentRowIndex = ref(0) as any;
-    const currentRow = computed(() => word[currentRowIndex.value]) as any;
-    const currentRow1 = computed(() => word[currentRowIndex.value - 1]) as any;
-    const guesses = reactive([]) as any;
-    const loadGuesses = ref("") as any;
+    const currentRow = computed(() => word.value[currentRowIndex.value]) as any;
     const guess = ref([]) as any;
+    const today = new Date().toLocaleDateString("he-IL", {
+      timeZone: "Asia/Jerusalem",
+    });
+    const splitedWord = computed(() => wordoftheday.value.split(""));
+    const guessNum = ref(0);
+    const wiggle = reactive({ wiggle: false });
+    const statistics = reactive({ statistics: false });
+    const success = reactive({ success: false });
+    const popUpValue = ref("");
+    const gridImage = ref("") as any;
+    const firstTimer = ref(false) as any;
+    const gamerKeyBoard = reactive({ active: false });
+    const keboardDelay = ref(true);
+
     const computedGuess = computed(() => {
       let word1 = "";
       for (let letter of guess.value) {
@@ -197,10 +165,11 @@ export default defineComponent({
       }
       return word1;
     });
+
     let computedKeyBoard = computed(() => {
       let word = [] as any;
-      guess.value.forEach((letter: any, index: any) => {
-        allLetters.forEach((char: any, charindex: any) => {
+      guess.value.forEach((letter: string) => {
+        allLetters.forEach((char: any) => {
           if (char.letter === letter) {
             word.push(char);
           }
@@ -209,226 +178,63 @@ export default defineComponent({
 
       return word;
     });
-    const keyBoardWord = reactive(computedGuess) as any;
-
-    const today = new Date().toLocaleDateString("he-IL", {
-      timeZone: "Asia/Jerusalem",
-    });
 
     const toggleDarkMode = () => {
       darkMode.value = !darkMode.value;
     };
 
-    const activateFlip = () => {
-      // word.forEach((letter) => {
-      currentRow1.value.letters.map((char: any) => {
-        // if (char.letter.length) {
-        setTimeout(() => {
-          char.flipped = true;
-        }, 1000);
-        // }
-        ///
-        // });
-      });
-      // flipit.flip = !flipit.flip;
-    };
-    const activateTestFlip = () => {
-      flipTest.testFlip = !flipTest.testFlip;
-    };
-
-    const splitedWord = computed(() => wordoftheday.value.split(""));
-
-    const row = ref(guesses.length + 1);
-    const guessNum = ref(0);
-    const testy = reactive({ wiggle: false });
-    const statistics = reactive({ statistics: false });
-    const success = reactive({ success: false });
-    const done = reactive({ done: false });
-    const wiggle = ref(false) as any;
-    const popUpValue = ref("");
-    const loadedfromlocalstorage = ref(false) as any;
-    const loadedfromlocalstorage11 = ref(true) as any;
-    const gridImage = ref("") as any;
-    const firstTimer = ref(false) as any;
-    const activateWiggle = () => {
-      wiggle.value = !wiggle.value;
-    };
-
-    const gamerKeyBoard = reactive({ active: false });
-    const activateGamerMode = () => {
-      gamerKeyBoard.active = !gamerKeyBoard.active;
-    };
-    // setTimeout(() => {
-    //   activateFlip();
-    // }, 3000);
-
-    const deleteKey = () => {
-      if (success.success === true) {
-        return;
-      }
-      for (const letter of [...currentRow.value.letters].reverse()) {
-        if (letter.letter) {
-          letter.letter = "";
-          guess.value.pop();
-          break;
-        }
-      }
-    };
-
-    const createGridImage = () => {
-      gridImage.value = word.map((letterObj) =>
-        letterObj.letters
-          .map((letter) => letter.status)
-          .slice(0, 4)
-          .join("")
-      );
-
-      // ⬛️🟩🟩🟥🟨🟨🟪🟦\gridImage
+    const removeChar = () => {
+      deleteKey(success, currentRow, guess);
     };
 
     const enterKey = (event: any) => {
-      if (success.success === true) {
-        return;
-      }
-      for (const letter of currentRow.value.letters) {
-        if (!letter.letter) {
-          letter.letter = event.key;
-          // if (loadedfromlocalstorage.value === false) {
-          guess.value.push(event.key);
-          // }
-          break;
-        }
-      }
+      keyEnter(success, currentRow, guess, event);
     };
 
     const handlesPopUp = (message: string) => {
-      popUpValue.value = message;
-      currentRow.value.tried = true;
-      testy.wiggle = true;
-      setTimeout(() => {
-        wiggle.value = false;
-        currentRow.value.tried = false;
-        popUpValue.value = "";
-        testy.wiggle = false;
-      }, 2000);
-      return;
-    };
-
-    const saveToLocalStorage = () => {
-      localStorage.setItem("date", today);
-      localStorage.setItem("guesses", JSON.stringify(guesses));
+      handlePopUp(popUpValue, currentRow, wiggle, message);
     };
 
     const makeGuess = () => {
-      console.log(computedGuess.value);
-      console.log("computedGuess.value");
-      if (success.success === true) {
-        return;
-      }
-      /////////// not enough characters   ////////////
-      if (computedGuess.value.length < 5) {
-        handlesPopUp("אין מספיק אותיות");
-      }
-
-      /////////// Not in the database ////////////
-      if (!allTheWord.includes(computedGuess.value)) {
-        console.log(computedGuess.value);
-        console.log("computedGuess.value");
-
-        handlesPopUp("לא במאגר");
-        return;
-      }
-
-      ////// change color /////
-      changeColor(currentRow, wordoftheday, splitedWord);
-      changeColorKeyBoard(computedKeyBoard, wordoftheday, splitedWord);
-
-      ////// Create Gtrid Img /////
-      createGridImage();
-
-      ///// Correct guess  /////
-      if (computedGuess.value === wordoftheday.value) {
-        success.success = true;
-        return;
-      }
-      ////// In database but wrong guess  /////
-
-      if (
-        computedGuess.value !== wordoftheday.value &&
-        allTheWord.includes(computedGuess.value)
-      ) {
-        guesses.push(computedGuess.value);
-        if (guessNum.value < 5) {
-          currentRow.value.tried = true;
-          currentRowIndex.value = currentRowIndex.value + 1;
-          guessNum.value = guessNum.value + 1;
-
-          activateFlip();
-          guess.value = [];
-
-          /////////////////////
-          // if (loadedfromlocalstorage11.value === false) {
-            console.log("lodedddededed");
-
-            saveToLocalStorage();
-          // }
-        }
-
-        ///// Game over - No more guesses left ////
-        if (guessNum.value === 5) {
-          statistics.statistics = true;
-        }
-      }
+      makeguess2(
+        keboardDelay,
+        computedGuess,
+        allTheWord,
+        success,
+        currentRow,
+        guess,
+        wordoftheday,
+        splitedWord,
+        computedKeyBoard,
+        currentRowIndex,
+        guessNum,
+        statistics,
+        popUpValue,
+        wiggle,
+        gridImage,
+        today,
+        word
+      );
     };
 
     const loadfromLocalStorage = () => {
-      loadGuesses.value = JSON.parse(localStorage.getItem("guesses") as any);
-
-      const date = localStorage.getItem("date");
-      // if (!date) {
-      //   firstTimer.value = true;
-      //   loadedfromlocalstorage.value = true;
-      // }
-
-      // if (date !== today) {
-      //   localStorage.removeItem("date");
-      //   localStorage.removeItem("guesses");
-      //   return;
-      // }
-
-      // debugger
-      if (loadGuesses.value) {
-        loadGuesses.value.forEach((word: any, index: any) => {
-          guess.value = [...word.split("")];
-          guess.value.forEach((char: any, index: any) => {
-            for (const letter of currentRow.value.letters) {
-              if (!letter.letter) {
-                letter.letter = char;
-                return
-                // if (loadedfromlocalstorage.value === false) {
-                // }
-              }
-                // return;
-            }
-            currentRowIndex.value = currentRowIndex.value + 1;
-            guessNum.value = guessNum.value + 1;
-          changeColor(currentRow, wordoftheday, splitedWord);
-          changeColorKeyBoard(computedKeyBoard, wordoftheday, splitedWord);
-            return
-          });
-          // return
-        });
-      }
-      // loadedfromlocalstorage.value = true;
-      // loadedfromlocalstorage11.value = false;
+      loadFromStorage(
+        gridImage,
+        word,
+        currentRowIndex,
+        success,
+        statistics,
+        firstTimer,
+        today,
+        wordoftheday,
+        splitedWord,
+        allLetters,
+      );
     };
 
-    const date = localStorage.getItem("date");
-    // if ((loadedfromlocalstorage.value11 = true)) {
-      // }
-    onMounted(()=>{
+    onBeforeMount(() => {
       loadfromLocalStorage();
-    })
+    });
 
     document.body.addEventListener("keydown", function (event) {
       if (
@@ -440,13 +246,32 @@ export default defineComponent({
       )
         return;
       if (event.key === "Backspace") {
-        deleteKey();
+        removeChar();
         return;
       }
       if (event.key === "Enter") {
-        makeGuess();
+        makeguess2(
+          keboardDelay,
+          computedGuess,
+          allTheWord,
+          success,
+          currentRow,
+          guess,
+          wordoftheday,
+          splitedWord,
+          computedKeyBoard,
+          currentRowIndex,
+          guessNum,
+          statistics,
+          popUpValue,
+          wiggle,
+          gridImage,
+          today,
+          word
+        );
         return;
       }
+
       enterKey(event);
     });
 
@@ -455,32 +280,23 @@ export default defineComponent({
       word,
       darkMode,
       toggleDarkMode,
-      fadeIn,
-      fadeEff,
-      flipit,
-      activateFlip,
-      row,
-      guesses,
       makeGuess,
-      wiggle,
-      activateWiggle,
       popUpValue,
       wordoftheday,
-      enterKey,
       deleteKey,
-      testy,
+      wiggle,
       currentRow,
       statistics,
       success,
       gridImage,
       handlesPopUp,
       computedGuess,
-      keyBoardWord,
       splitedWord,
       allLetters,
       gamerKeyBoard,
-      activateGamerMode,
-      flipTest,
+      theDate,
+      removeChar,
+      enterKey,
     };
   },
 });
@@ -521,7 +337,6 @@ export default defineComponent({
   animation-fill-mode: both;
 }
 
-/** An element that fades in */
 .sceneelementfadein {
   animation-name: fadeIn;
 }
@@ -529,6 +344,5 @@ export default defineComponent({
 .innerCard {
   transition: transform 1.3s;
   transform-style: preserve-3d;
-  /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
 }
 </style>

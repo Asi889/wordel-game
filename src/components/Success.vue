@@ -1,10 +1,10 @@
 <template>
   <div
-    class="grid justify-content-center text-center z-10 self-center fixed max-h-[466px] max-w-w[422px] bg-white rounded-lg drop-shadow-2xl border-black px-5 py-5"
+    class="grid success justify-content-center text-center z-10 self-center fixed max-h-[466px] max-w-w[422px] bg-white rounded-lg drop-shadow-2xl border-black px-5 py-5"
   >
     <h1 class="text-3xl">!כל הכבוד</h1>
     <!-- <h2>שתפו את התוצאה:</h2> -->
-    <h2 class="justify-self-end text-xl pt-4">:שתפו את התוצאה</h2>
+    <h2 class="justify-self-end text-xl pt-4 pl-8">:שתפו את התוצאה</h2>
     <a href="#" @click="handleShare()">
       <div
         class="flex bg-green-500 gap-x-5 rounded-2xl py-4 px-4 mx-5 mt-4 justify-around"
@@ -59,7 +59,7 @@
     </a>
     <div class="justify-self-center pt-4">
       <h1 class="text-2xl">המילה הבאה העוד</h1>
-      <h1>x זמן</h1>
+      <CountDown :theDate="theDate" />
     </div>
   </div>
 </template>
@@ -67,13 +67,14 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, ref } from "vue";
 import { copyResult } from "../functions/copyResult"
+import CountDown from "./CountDown.vue"
 
 export default defineComponent({
   name: "Success",
-  components: {},
-  props: ["gridImage","handlesPopUp"],
+  components: {CountDown},
+  props: ["gridImage","handlesPopUp", "theDate"],
   setup(props) {
-    const { gridImage, handlesPopUp } = props;
+    const { gridImage, handlesPopUp, theDate } = props;
     const test1 = ref([
       "🟩",
       "⬜",
@@ -97,9 +98,13 @@ const link_url= ref("hell mary")
         copyResult(gridImage)
         handlesPopUp("הועתק")
     }
-    return { gridImage, test1, link_url, handleShare };
+    return { gridImage, test1, link_url, handleShare, theDate };
   },
 });
 </script>
 
-<style></style>
+<style>
+.success{
+  direction: ltr;
+}
+</style>

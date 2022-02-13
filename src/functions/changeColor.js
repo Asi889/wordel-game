@@ -1,4 +1,4 @@
-export function changeColor(currentRow, wordoftheday, splitedWord) {
+export function changeColor(currentRow, wordoftheday, splitedWord, keboardDelay) {
     function randomIntFromInterval(min, max) { // min and max included 
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
@@ -9,7 +9,11 @@ export function changeColor(currentRow, wordoftheday, splitedWord) {
             return
         }
         if (!wordoftheday.value.includes(letter.letter)) {
-            letter.notInWord = true;
+            // letter.notInWord = true;
+            setTimeout(() => {
+                letter.notInWord = true;
+                keboardDelay.value = true
+              },index * 250);
             if(rndInt === 1){
                 letter.status = "🟨"
 
@@ -19,7 +23,13 @@ export function changeColor(currentRow, wordoftheday, splitedWord) {
         }
 
         if (wordoftheday.value.includes(letter.letter)) {
-            letter.inWord = true;
+                // letter.inWord = true;
+                setTimeout(() => {
+                letter.inWord = true;
+                keboardDelay.value = true
+
+                // letter.notInWord = true;
+              },index * 250);
             if(rndInt === 1){
                 
                 letter.status = "🟩"
@@ -28,7 +38,12 @@ export function changeColor(currentRow, wordoftheday, splitedWord) {
             }
             splitedWord.value.forEach((char, index1) => {
                 if (char === letter.letter && index1 === index) {
-                    letter.rightPosition = true;
+                    // letter.rightPosition = true;
+                    setTimeout(() => {
+                        letter.rightPosition = true;
+                        keboardDelay.value = true
+                        // letter.notInWord = true;
+                      },index * 250);
                     if(rndInt === 1){
                         letter.status = "⬜"
         

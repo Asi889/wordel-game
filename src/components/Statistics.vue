@@ -1,6 +1,6 @@
 <template>
   <div
-    class="self-center z-10 fixed max-h-[466px] max-w-w[422px] slide-up h-[450px] w-[420px] bg-white rounded-lg shadow-2xl border-black px-5 py-5"
+    class="self-center z-10 fixed statistics max-h-[466px] max-w-w[422px] slide-up h-[450px] w-[420px] bg-white rounded-lg shadow-2xl border-black px-5 py-5 bottom-[13%]"
   >
     <div class="grid">
       <h1 class="justify-self-center text-3xl font-bold">לא הצליח הפעם</h1>
@@ -10,7 +10,7 @@
         </h2>
         <h2 class="justify-self-center text-2xl pt-3">מילת היום היתה</h2>
       </div>
-      <h2 class="justify-self-end text-xl pt-4">:שתפו את התוצאה</h2>
+      <h2 class="justify-self-end text-xl pt-4 pr-8">:שתפו את התוצאה</h2>
       <a href="#" @click="handleShare()">
         <div
           class="flex bg-green-500 rounded-2xl py-4 px-4 mx-5 mt-4 justify-around"
@@ -66,9 +66,8 @@
 
       <div class="justify-self-center pt-4">
         <h1 class="text-2xl">המילה הבאה העוד</h1>
-        <!-- <CountDown :timeLeft="timeLeft" /> -->
-        <Timer :timeLeft="timeLeft" />
-        <h1>x זמן</h1>
+        <CountDown :theDate="theDate" />
+        <!-- <Timer :timeLeft="timeLeft" /> -->
       </div>
     </div>
   </div>
@@ -77,34 +76,29 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, reactive, ref } from "vue";
 import { copyResult } from "../functions/copyResult";
-// import CountDown from "./CountDown.vue"
+import CountDown from "./CountDown.vue"
 import Timer from "./Timer.vue";
 
 export default defineComponent({
   name: "Statistics",
-  components: { Timer },
-  props: ["gridImage", "wordoftheday", "handlesPopUp"],
+  components: { CountDown },
+  props: ["gridImage", "wordoftheday", "handlesPopUp", "theDate"],
   setup(props) {
-    const { gridImage, wordoftheday, handlesPopUp } = props as any;
-    const timeLimit = ref(20) as any;
-    const timePassed = ref(0) as any;
-    const timeLeft = computed(() =>  timeLimit.value - timePassed.value) 
-    const timerInterval = ref(null) as any;
-    const startTimer = () => {
-      timerInterval.value = setInterval(() => (timePassed.value += 1),1000);
-    };
+    const { gridImage, wordoftheday, handlesPopUp, theDate } = props as any;
+    
     const handleShare = () => {
       copyResult(gridImage);
       handlesPopUp("הועתק");
     };
-    onMounted(() => {
-      startTimer();
-      console.log("im monted bitches");
-    });
+    
 
-    return { gridImage, wordoftheday, handleShare, timeLeft };
+    return { gridImage, wordoftheday, handleShare };
   },
 });
 </script>
 
-<style></style>
+<style>
+.statistics{
+  direction: ltr;
+}
+</style>

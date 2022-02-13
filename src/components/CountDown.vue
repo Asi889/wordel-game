@@ -1,75 +1,71 @@
 <template>
-  <div class="base-timer">
-    <svg
-      class="base-timer__svg"
-      viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g class="base-timer__circle">
-        <circle class="base-timer__path-elapsed" cx="50" cy="50" r="46.5" />
-      </g>
-    </svg>
-    <span class="base-timer__label">
-      {{ formattedTimeLeft }}
-    </span>
+  <div
+    class="timer-wrapper h-10 flex gap-x-3 w-full justify-center items-center"
+  >
+    <div>
+      {{ hours.h }}
+    </div>
+    <div>:</div>
+    <div>
+      {{ min.m }}
+    </div>
+    <div>:</div>
+    <div>
+      {{ sec.s }}
+    </div>
   </div>
 </template>
 
-<script>
-export default defineComponent( {
+<script lang="ts">
+import { reactive, ref } from "@vue/reactivity";
+import { getDate } from "../utils/words";
+import {
+  defineComponent,
+  onMounted,
+  watch,
+  watchEffect,
+} from "@vue/runtime-core";
+
+export default defineComponent({
   name: "CountDown",
-  props: ["timeLeft"],
+  props: ["theDate"],
   components: {},
   setup(props) {
-    const { timeLeft } = props;
-    const formattedTimeLeft = computed(() => {
-      const timeLeft1 = timeLeft;
-      const minutes = Math.floor(timeLeft1 / 60);
-      let seconds = timeLeft1 % 60;
-      if (seconds < 10) {
-        seconds = `0${seconds}`;
-      }
-      return `${minutes}:${seconds}`;
-    });
-    return {formattedTimeLeft}
+    const { theDate } = props;
+    // const dateTest= getDate()
+    // console.log({dateTest})
+    const d = reactive(new Date()) as any;
+    const hours = reactive({ h: "" }) as any;
+    const min = reactive({ m: "" }) as any;
+    const sec = reactive({ s: "" }) as any;
+    let countDown = "" as any;
+    const countDown1 = () => {
+      const now = Number(theDate);
+      const now1 = Date.now();
+      
+      const then = now + 86400 * 1000;
+
+      countDown = setInterval(() => {
+        const secondsLeft = Math.round((then - now) / 1000);
+
+        if (secondsLeft <= 0) {
+          clearInterval(countDown);
+          return;
+        }
+
+        hours.h = Math.floor((secondsLeft % 86400) / 3600);
+        min.m = Math.floor(((secondsLeft % 86400) % 3600) / 60);
+        sec.s =
+          secondsLeft % 60 < 10 ? `0${secondsLeft % 60}` : secondsLeft % 60;
+      }, 1000);
+    };
+    countDown1();
+    // onMounted(()=>{
+    // })
+
+    return { hours, min, sec };
   },
 });
 </script>
 
-<style lang="scss">
-.base-timer {
-  position: relative;
-  width: 300px;
-  height: 300px;
-
-  /* Removes SVG styling that would hide the time label */
-  &__circle {
-    fill: none;
-    stroke: none;
-  }
-
-  /* The SVG path that displays the timer's progress */
-  &__path-elapsed {
-    stroke-width: 7px;
-    stroke: grey;
-  }
-  &__label {
-    position: absolute;
-
-    /* Size should match the parent container */
-    width: 300px;
-    height: 300px;
-
-    /* Keep the label aligned to the top */
-    top: 0;
-
-    /* Create a flexible box that centers content vertically and horizontally */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    /* Sort of an arbitrary number; adjust to your liking */
-    font-size: 48px;
-  }
-}
-</style>
+<style></style>

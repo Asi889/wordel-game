@@ -1,79 +1,52 @@
 <template>
-  <div class="base-timer">
-    <svg
-      class="base-timer__svg"
-      viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g class="base-timer__circle">
-        <circle class="base-timer__path-elapsed" cx="50" cy="50" r="46.5" />
-      </g>
-    </svg>
-    <span class="base-timer__label">
-      {{ formattedTimeLeft }}
-    </span>
+  <div class="timer-wrapper w-28 h-10 flex gap-x-3">
+    <div>
+      {{ hours.value }}
+    </div>
+    <div>:</div>
+    <div>
+      {{ min.value }}
+    </div>
+    <div>:</div>
+    <div>
+      {{ sec.value }}
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed } from "@vue/reactivity";
+import { computed, ref } from "@vue/reactivity";
 import { defineComponent } from "@vue/runtime-core";
+import { onMounted } from "vue";
 
-export default defineComponent( {
+export default defineComponent({
   name: "Timer",
   props: ["timeLeft"],
   components: {},
   setup(props) {
-    const { timeLeft } = props as any;
-    const formattedTimeLeft = computed(() => {
-      const timeLeft1 = timeLeft as any;
-      const minutes = Math.floor(timeLeft1 / 60) as any;
-      let seconds = timeLeft1 % 60 as any;
-      if (seconds < 10) {
-        seconds = `0${seconds}`;
+    const d = ref(new Date());
+    const hours = ref(24 - d.value.getHours()) as any;
+    const min = ref(60 - d.value.getMinutes()) as any;
+    const sec = ref(60 - d.value.getSeconds()) as any;
+    const timee = () => {
+      console.log("wanker");
+      
+      if ((min.value + "").length == 1) {
+        min.value = "0" + min.value;
       }
-      return `${seconds}:${minutes}`;
-    }) as any;
-    return {formattedTimeLeft}
+      // var sec = 60 - d.getSeconds();
+      if ((sec.value + "").length == 1) {
+        sec.value = "0" + sec;
+      }
+    };
+    onMounted(() => {
+      setInterval(() => {
+        timee();
+      }, 1000);
+    });
+    return { hours, min, sec };
   },
 });
 </script>
 
-<style lang="scss">
-.base-timer {
-  position: relative;
-  width: 300px;
-  height: 300px;
-
-  /* Removes SVG styling that would hide the time label */
-  &__circle {
-    fill: none;
-    stroke: none;
-  }
-
-  /* The SVG path that displays the timer's progress */
-  &__path-elapsed {
-    stroke-width: 7px;
-    stroke: grey;
-  }
-  &__label {
-    position: absolute;
-
-    /* Size should match the parent container */
-    width: 300px;
-    height: 300px;
-
-    /* Keep the label aligned to the top */
-    top: 0;
-
-    /* Create a flexible box that centers content vertically and horizontally */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    /* Sort of an arbitrary number; adjust to your liking */
-    font-size: 48px;
-  }
-  
-}
-</style>
+<style></style>

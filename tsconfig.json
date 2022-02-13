@@ -33,7 +33,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/functions/deleteKey.js", "src/functions/keyEnter.ts"  ],
   "exclude": [
     "node_modules"
   ]
