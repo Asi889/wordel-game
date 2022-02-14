@@ -33,24 +33,24 @@
               <div
                 class="front w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 text-white bg-[#6bc26b] border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
               >
-                ב
+                ס
               </div>
             </div>
           </div>
           <div
             class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
-            נ
+            פ
           </div>
           <div
             class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
-            א
+            ג
           </div>
           <div
             class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
-            ל
+            ט
           </div>
           <div
             class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
@@ -58,7 +58,7 @@
             י
           </div>
         </div>
-        <p class="">האות ב נמצא במילה ובמיקום הנכון</p>
+        <p class="">האות ס נמצא במילה ובמיקום הנכון</p>
       </div>
 
       <!-- //////// -->
@@ -67,7 +67,7 @@
           <div
             class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
-            ו
+            ב
           </div>
           <div
             class="flip-container"
@@ -77,9 +77,14 @@
               <div
                 class="veritacl-flip w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 text-white bg-[#d2b35c] border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
               >
-                ג
+                י
               </div>
             </div>
+          </div>
+          <div
+            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
+          >
+            צ
           </div>
           <div
             class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
@@ -89,15 +94,10 @@
           <div
             class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
-            נ
-          </div>
-          <div
-            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
-          >
-            ה
+            ם
           </div>
         </div>
-        <p class="">האות ג נמצא במילה אבל במיקום הלא נכון</p>
+        <p class="">האות י נמצא במילה אבל במיקום הלא נכון</p>
       </div>
       <!-- //////// -->
       <div class="grid gap-y-2 border-b-2 border-gray-500 pb-2 sm:pb-5">
@@ -105,12 +105,12 @@
           <div
             class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
-            א
+            ק
           </div>
           <div
             class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
-            נ
+           י
           </div>
           <div
             class="flip-container"
@@ -120,22 +120,22 @@
               <div
                 class="front w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 text-white bg-gray-500 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
               >
-                ט
+                נ
               </div>
             </div>
           </div>
           <div
             class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
-            מ
+            ו
           </div>
           <div
             class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
-            נ
+            ח
           </div>
         </div>
-        <p class="">האות ט לא נמצא במילה</p>
+        <p class="">האות נ לא נמצא במילה</p>
       </div>
       <div class="font-bold pr-1 sm:pr-0">בכל יום יופיע וורדל חדש ליפאנוח!</div>
       <div class="grid">
