@@ -58,8 +58,8 @@
       </div>
     </a>
     <div class="justify-self-center pt-4">
-      <h1 class="text-2xl">המילה הבאה העוד</h1>
-      <CountDown :theDate="theDate" />
+      <h1 class="text-2xl">המילה הבאה תופיע מחר, בהצלחה!</h1>
+      <!-- <CountDown :theDate="theDate" /> -->
     </div>
   </div>
 </template>

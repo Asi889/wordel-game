@@ -52,7 +52,7 @@ export default defineComponent({
   props: ["layout", "darkModeText", "darkMode"],
   setup(props) {
     const { layout, darkModeText, darkMode } = props;
-    const title = "וורדל" as string;
+    const title = "וורדל - IL" as string;
     const openSettings = () => {
       layout.main = false;
       layout.info = true;

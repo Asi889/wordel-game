@@ -141,15 +141,18 @@
       <div class="grid">
         <div class="flex  gap-2">
           <p>כל הזכויות שמורות ל</p>
-          <a href="">לאסף מרום</a>
-          <p>C</p>
+          <a class="text-[#3b0494] flex" href="https://asimarom.com/">
+          אסף מרום
+          
+          <img class="w-10 h-10" src="https://res.cloudinary.com/dvdzjj8jo/image/upload/v1639907803/Asaf_up6v4r.png" />
+          </a>
           <p>2022</p>
         </div>
         <div class="flex gap-2">
           <p>המשחק מבוסס על</p>
-          <a href="">Wordle</a>
+          <a class="link" href="https://www.nytimes.com/games/wordle/index.html">Wordle</a>
           <p>וקוד המקור שלו</p>
-          <a href="">זמין לצפייה</a>
+          <a class="link" href="https://github.com/Asi889/wordel-game">זמין לצפייה</a>
         </div>
       </div>
     </div>
@@ -189,6 +192,10 @@ export default {
 .front {
   animation-name: rotate;
   animation-duration: 2s;
+}
+.link{
+  color: rgb(59, 4, 148);
+  border-bottom: 1px solid rgb(59, 4, 148);
 }
 
 @keyframes rotate {

@@ -91,7 +91,7 @@ import { getTodayWord, getlAllWords, getDate } from "./utils/words";
 import Popup from "./components/Popup.vue";
 import { board } from "./utils/board";
 import FrontTile from "./components/FrontTile.vue";
-import { alphab, restOfElphabet1 } from "./utils/letters";
+import { alphab, restOfElphabet1, endLetters } from "./utils/letters";
 import { makeguess2 } from "./functions/makeguess2";
 import { deleteKey } from "./functions/deleteKey";
 import { keyEnter } from "./functions/keyEnter";
@@ -134,7 +134,13 @@ export default defineComponent({
     const allTheWord = getlAllWords();
     const theDate = ref(wordoftheday1.value.date);
     const word = ref(board());
+    
+    console.log(wordoftheday);
+    console.log("wordoftheday");
+    
+    
     const allLetters = reactive([...alphab, ...restOfElphabet1]);
+    const finalLetters = reactive(endLetters);
     const layout = reactive({
       settings: false,
       info: false,
@@ -143,6 +149,8 @@ export default defineComponent({
     const darkMode = ref(false);
     const currentRowIndex = ref(0) as any;
     const currentRow = computed(() => word.value[currentRowIndex.value]) as any;
+    // console.log(currentRow);
+    // console.log("word.value");
     const guess = ref([]) as any;
     const today = new Date().toLocaleDateString("he-IL", {
       timeZone: "Asia/Jerusalem",
@@ -188,7 +196,7 @@ export default defineComponent({
     };
 
     const enterKey = (event: any) => {
-      keyEnter(success, currentRow, guess, event);
+      keyEnter(success, currentRow, guess, event, wordoftheday, finalLetters);
     };
 
     const handlesPopUp = (message: string) => {

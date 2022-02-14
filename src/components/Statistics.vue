@@ -17,7 +17,7 @@
         >
           <div class="grid bg-white rounded-lg text-right px-2 py-2 w-[126px]">
             <div
-              class="grid gap-3"
+              class="grid gap-3 justify-center"
               v-for="(tiles, index) in gridImage"
               v-bind:key="index"
             >
@@ -65,8 +65,8 @@
       </a>
 
       <div class="justify-self-center pt-4">
-        <h1 class="text-2xl">המילה הבאה העוד</h1>
-        <CountDown :theDate="theDate" />
+        <h1 class="text-2xl">המילה הבאה תופיע מחר, בהצלחה!</h1>
+        <!-- <CountDown :theDate="theDate" /> -->
         <!-- <Timer :timeLeft="timeLeft" /> -->
       </div>
     </div>

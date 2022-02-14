@@ -62,8 +62,7 @@ export function loadFromStorage(
     let flatGrid= grid4[0].replaceAll(',', '')
     // let ggg = flatGrid.
     gridImage.value = [grid4[0].replaceAll(',', '')];
-    console.log(flatGrid);
-    console.log("gridImage.value");
+    
     
     // createGridImage();
     // createGrid1(gridImage, word);
