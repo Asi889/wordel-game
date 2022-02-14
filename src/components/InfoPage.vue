@@ -1,14 +1,16 @@
 <template>
   <div
-    class="info-wrapper pt-3 w-full flex flex-col gap-y-2 sm:gap-y-4 px-1 sm:px-0  scene_element scene_element--fadeinup"
+    class="info-wrapper pt-3 w-full flex flex-col gap-y-2 sm:gap-y-4 px-1 sm:px-0 scene_element scene_element--fadeinup"
     v-bind:class="{ settingsWrapperDark: darkMode, fadeOut: fadeout1.value }"
   >
     <div class="flex justify-between">
       <span></span>
       <h1 class="mx-auto text-xl">איך משחקים</h1>
-      <button @click="handlClick">X</button>
+      <button class="pl-3 sm:pl-1 font-semibold" @click="handlClick">X</button>
     </div>
-    <div class="border-b-2 border-gray-500 flex flex-col gap-y-3 pt-1 pb-4 sm:pb-4 text-sm sm:text-base">
+    <div
+      class="border-b-2 border-gray-500 flex flex-col gap-y-3 pt-1 pb-4 sm:pb-4 pr-2 sm:pr-0 text-base sm:text-base"
+    >
       <p>יש לנחש/י את המילה ב6 ניסיונות</p>
       <p>
         ל ניחוש חייב להיות מילה תקפה בת 5 אותיות. לחץ על כפתור ה-Enter כדי
@@ -19,8 +21,8 @@
         למילה.
       </p>
     </div>
-    <div class="grid gap-y-2 sm:gap-y-4 pr-1 sm:pr-0">
-      <p class="text-[15px] sm:text-base">דוגמאות</p>
+    <div class="grid gap-y-2 sm:gap-y-4 pr-2 sm:pr-0">
+      <p class=" ">דוגמאות</p>
       <div class="grid gap-y-2">
         <div class="flex gap-x-3">
           <div
@@ -29,41 +31,41 @@
           >
             <div class="flipper">
               <div
-                class="front w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 text-white bg-[#6bc26b] border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+                class="front w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 text-white bg-[#6bc26b] border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
               >
                 ב
               </div>
             </div>
           </div>
           <div
-            class="w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
             נ
           </div>
           <div
-            class="w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
             א
           </div>
           <div
-            class="w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
             ל
           </div>
           <div
-            class="w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
             י
           </div>
         </div>
-        <p class="text-[15px] sm:text-base">האות ב נמצא במילה ובמיקום הנכון</p>
+        <p class="">האות ב נמצא במילה ובמיקום הנכון</p>
       </div>
 
       <!-- //////// -->
       <div class="grid gap-y-2">
         <div class="flex gap-x-3">
           <div
-            class="w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
             ו
           </div>
@@ -73,40 +75,40 @@
           >
             <div class="flipper">
               <div
-                class="veritacl-flip w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 text-white bg-[#d2b35c] border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+                class="veritacl-flip w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 text-white bg-[#d2b35c] border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
               >
                 ג
               </div>
             </div>
           </div>
           <div
-            class="w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
             י
           </div>
           <div
-            class="w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
             נ
           </div>
           <div
-            class="w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
             ה
           </div>
         </div>
-        <p class="text-[15px] sm:text-base">האות ג נמצא במילה אבל במיקום הלא נכון</p>
+        <p class="">האות ג נמצא במילה אבל במיקום הלא נכון</p>
       </div>
       <!-- //////// -->
       <div class="grid gap-y-2 border-b-2 border-gray-500 pb-2 sm:pb-5">
         <div class="flex gap-x-3">
           <div
-            class="w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
             א
           </div>
           <div
-            class="w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
             נ
           </div>
@@ -116,46 +118,60 @@
           >
             <div class="flipper">
               <div
-                class="front w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 text-white bg-gray-500 border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+                class="front w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 text-white bg-gray-500 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
               >
                 ט
               </div>
             </div>
           </div>
           <div
-            class="w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
             מ
           </div>
           <div
-            class="w-[36px] h-[34px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl  font-bold"
+            class="w-[50px] h-[50px] sm:h-[70px] sm:w-[70px] border-2 border-gray-500 flex justify-center items-center text-xl sm:text-5xl font-bold"
           >
             נ
           </div>
         </div>
-        <p class="text-[15px] sm:text-base">האות ט לא נמצא במילה</p>
+        <p class="">האות ט לא נמצא במילה</p>
       </div>
       <div class="font-bold pr-1 sm:pr-0">בכל יום יופיע וורדל חדש ליפאנוח!</div>
+      <div class="grid">
+        <div class="flex  gap-2">
+          <p>כל הזכויות שמורות ל</p>
+          <a href="">לאסף מרום</a>
+          <p>C</p>
+          <p>2022</p>
+        </div>
+        <div class="flex gap-2">
+          <p>המשחק מבוסס על</p>
+          <a href="">Wordle</a>
+          <p>וקוד המקור שלו</p>
+          <a href="">זמין לצפייה</a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from '@vue/reactivity';
+import { ref } from "@vue/reactivity";
 export default {
   props: ["layout", "darkMode"],
   setup(props) {
-    const { layout, darkMode} = props;
-    let fadeout1= ref(false)
+    const { layout, darkMode } = props;
+    let fadeout1 = ref(false);
     const handlClick = () => {
       layout.main = true;
       layout.settings = false;
       layout.info = false;
-      fadeout1= !fadeout1
+      fadeout1 = !fadeout1;
       // fadeEff()
     };
 
-    return { handlClick, darkMode,fadeout1 };
+    return { handlClick, darkMode, fadeout1 };
   },
 };
 </script>
@@ -222,10 +238,4 @@ export default {
     transform: none;
   }
 }
-
-
-  
-
-
-
 </style>

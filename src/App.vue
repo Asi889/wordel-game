@@ -5,7 +5,7 @@
   >
     <div
       v-if="layout.main"
-      class="flex flex-col gap-y-4 w-full max-w-lg mx-auto h-[100vh] justify-around"
+      class="flex flex-col gap-y-12 sm:gap-y-4 w-full max-w-lg mx-auto h-[100vh] pt-4 sm:pt-1 sm:justify-around"
     >
       <TopBar
         :layout="layout"
@@ -27,7 +27,7 @@
         :theDate="theDate"
       />
       <div
-        class="mt-14 relative flex flex-col gap-y-4"
+        class="mt-5 sm:mt-14 relative flex flex-col gap-y-4"
         v-bind:class="{
           'opacity-50': statistics.statistics || success.success,
         }"
@@ -46,7 +46,7 @@
       </div>
 
       <div
-        class="flex flex-wrap gap-2 justify-center KeyBoardWrapper"
+        class="flex flex-wrap gap-2 justify-center px-4 sm:px-1 pt-3 sm:pt-0 KeyBoardWrapper"
         v-bind:class="{
           darkModeKeyboard: darkMode,
           'opacity-50': statistics.statistics || success.success,
@@ -60,7 +60,7 @@
         />
       </div>
     </div>
-    <div class="w-full max-w-lg mx-auto h-[100vh] justify-around">
+    <div  v-if="layout.settings || layout.info" class="w-full max-w-lg mx-auto h-[100vh] justify-around">
       <SettingsPage
         v-if="layout.settings"
         :layout="layout"

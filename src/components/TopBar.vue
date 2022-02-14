@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex gap-4 pb-3 justify-between items-center border-b-2 border-grey-100"
+    class="flex gap-4 pb-3 justify-between items-center border-b-2 border-grey-100 px-4 sm:px-1"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

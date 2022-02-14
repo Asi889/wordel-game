@@ -2,7 +2,7 @@
   <div
     v-for="letter in alphabet"
     v-bind:key="letter"
-    class="grid tilee justify-center items-center w-6 h-9 sm:w-12 sm:h-12 text-black bg-gray-400 rounded placeholder:text-black"
+    class="grid tilee justify-center items-center w-8 h-10 sm: sm:w-12 sm:h-12 text-black bg-gray-400 rounded placeholder:text-black"
     v-bind:class="{
       inposition: letter.position === 'inPosition',
       inword: letter.position === 'inWord',
