@@ -39,7 +39,6 @@ export function loadFromStorage(
       splited[0].forEach((letter: any, letterIndex: any) => {
         allLetters.forEach((char: any) => {
           if (letter == char.letter) {
-            console.log("innnnnnnnnnnnnnnnnnn");
 
             if (!wordoftheday.value.includes(letter)) {
               char.position = "notInWord";

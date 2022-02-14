@@ -135,8 +135,8 @@ export default defineComponent({
     const theDate = ref(wordoftheday1.value.date);
     const word = ref(board());
     
-    console.log(wordoftheday);
-    console.log("wordoftheday");
+    // console.log(wordoftheday);
+    // console.log("wordoftheday");
     
     
     const allLetters = reactive([...alphab, ...restOfElphabet1]);
@@ -149,8 +149,7 @@ export default defineComponent({
     const darkMode = ref(false);
     const currentRowIndex = ref(0) as any;
     const currentRow = computed(() => word.value[currentRowIndex.value]) as any;
-    // console.log(currentRow);
-    // console.log("word.value");
+  
     const guess = ref([]) as any;
     const today = new Date().toLocaleDateString("he-IL", {
       timeZone: "Asia/Jerusalem",
