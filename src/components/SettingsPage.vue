@@ -1,9 +1,9 @@
 <template>
-  <div class="settings-wrapper pt-3 w-full flex flex-col gap-y-4 px-2 sm:px-0 slide-up text-sm sm:text-base" v-bind:class="{settingsWrapperDarkmode: darkMode}">
+  <div class="settings-wrapper pt-3 w-full flex flex-col gap-y-4 px-2 sm:px-0 slide-up " v-bind:class="{settingsWrapperDarkmode: darkMode}">
     <div class="flex justify-between">
       <span></span>
-      <h1>הגדרות</h1>
-      <button @click="handlClick">X</button>
+      <h1 class=" text-xl">הגדרות</h1>
+      <button class="pl-3 sm:pl-1 font-semibold" @click="handlClick">X</button>
     </div>
     <div
       class="flex justify-between border-b-2 border-gray-300 py-3 items-center"
