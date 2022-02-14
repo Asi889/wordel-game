@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-wrapper pt-3 w-full flex flex-col gap-y-4 slide-up" v-bind:class="{settingsWrapperDarkmode: darkMode}">
+  <div class="settings-wrapper pt-3 w-full flex flex-col gap-y-4 px-2 sm:px-0 slide-up text-sm sm:text-base" v-bind:class="{settingsWrapperDarkmode: darkMode}">
     <div class="flex justify-between">
       <span></span>
       <h1>הגדרות</h1>

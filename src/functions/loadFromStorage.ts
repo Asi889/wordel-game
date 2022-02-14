@@ -30,7 +30,7 @@ export function loadFromStorage(
   const guesses = JSON.parse(localStorage.getItem("guesses") as any);
   const rowNum = JSON.parse(localStorage.getItem("rowindex") as any);
   const winnerCheck = JSON.parse(localStorage.getItem("winner") as any);
-  const grid4 = [localStorage.getItem("grid")] as any;
+  const grid4 = [localStorage.getItem("grid")] as Array<any>;
   if (guesses) {
 
     guesses.forEach((guess: any) => {
@@ -59,9 +59,14 @@ export function loadFromStorage(
   }
 
   if (grid4) {
-    gridImage.value = grid4;
+    let flatGrid= grid4[0].replaceAll(',', '')
+    // let ggg = flatGrid.
+    gridImage.value = [grid4[0].replaceAll(',', '')];
+    console.log(flatGrid);
+    console.log("gridImage.value");
+    
     // createGridImage();
-    createGrid1(gridImage, word);
+    // createGrid1(gridImage, word);
   }
 
   if (!storageWord || !rowNum) {

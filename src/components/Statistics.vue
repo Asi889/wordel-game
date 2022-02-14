@@ -15,7 +15,7 @@
         <div
           class="flex bg-green-500 rounded-2xl py-4 px-4 mx-5 mt-4 justify-around"
         >
-          <div class="grid bg-white rounded-lg text-right px-2 py-2">
+          <div class="grid bg-white rounded-lg text-right px-2 py-2 w-[126px]">
             <div
               class="grid gap-3"
               v-for="(tiles, index) in gridImage"

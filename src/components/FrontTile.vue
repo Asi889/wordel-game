@@ -15,7 +15,7 @@
       }"
     >
       <div
-        class="grid content-center border-2 border-gray-400 w-16 h-16 ג text-3xl font-bold text-center"
+        class="grid content-center border-2 border-gray-400 w-12 h-12 sm:w-16 sm:h-16 text-3xl font-bold text-center"
         v-bind:id="'letter-' + rowIndex + '-' + ++index"
         v-bind:class="{
           darkModeRows: darkMode,

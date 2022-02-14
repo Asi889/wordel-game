@@ -12,9 +12,9 @@
          type="button"
       >
         <div
-          class="grid grid-cols-3 gap-x-6 bg-white rounded-lg text-right px-2 py-2"
+          class="flex flex-col gap-1 items-center gap-x-6 bg-white rounded-lg text-right px-2 py-2"
         >
-          <div class="gap-3" v-for="(tiles, index) in test1" v-bind:key="index">
+          <div class="gap-3" v-for="(tiles, index) in gridImage" v-bind:key="index">
             {{ tiles }}
           </div>
         </div>

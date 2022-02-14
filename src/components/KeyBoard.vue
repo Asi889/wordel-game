@@ -2,7 +2,7 @@
   <div
     v-for="letter in alphabet"
     v-bind:key="letter"
-    class="grid tilee justify-center items-center w-12 h-12 text-black bg-gray-400 rounded placeholder:text-black"
+    class="grid tilee justify-center items-center w-6 h-9 sm:w-12 sm:h-12 text-black bg-gray-400 rounded placeholder:text-black"
     v-bind:class="{
       inposition: letter.position === 'inPosition',
       inword: letter.position === 'inWord',
@@ -38,7 +38,7 @@
     {{ letter.letter }}
   </div>
   <div
-    class="grid justify-center items-center w-12 h-12 text-black bg-gray-400 rounded placeholder:text-black keyboardInput"
+    class="grid justify-center items-center w-6 h-9 sm:w-12 sm:h-12  text-black bg-gray-400 rounded placeholder:text-black keyboardInput"
     v-bind:class="{ blueChar: gamerKeyBoard.active === true }"
     @click="gamer"
   >
@@ -53,7 +53,7 @@
     </svg>
   </div>
   <div
-    class="grid justify-center items-center w-12 h-12 text-black bg-gray-400 rounded placeholder:text-black keyboardInput"
+    class="grid justify-center items-center text-xs sm:text-base w-8 h-9 sm:w-12 sm:h-12 text-black bg-gray-400 rounded placeholder:text-black keyboardInput"
     v-bind:class="{ blueChar: gamerKeyBoard.active === true }"
     @click="removeChar()"
   >
@@ -62,7 +62,7 @@
   <div
     v-for="letter in restOfLetters"
     v-bind:key="letter"
-    class="grid justify-center items-center w-12 h-12 text-black bg-gray-400 rounded placeholder:text-black keyboardInput"
+    class="grid justify-center items-center w-6 h-9 sm:w-12 sm:h-12 text-black bg-gray-400 rounded placeholder:text-black keyboardInput"
     v-bind:class="{
       inposition: letter.position === 'inPosition',
       inword: letter.position === 'inWord',
@@ -80,7 +80,7 @@
   </div>
   <div
     type="button"
-    class="grid justify-center items-center w-12 h-12 text-black bg-gray-400 rounded placeholder:text-black keyboardInput"
+    class="grid justify-center items-center text-xs sm:text-base w-8 h-9 sm:w-12 sm:h-12 text-black bg-gray-400 rounded placeholder:text-black keyboardInput"
     v-bind:class="{ greenChar: gamerKeyBoard.active === true }"
     value="Enter"
     @click="handleGuess"
