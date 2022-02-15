@@ -46,7 +46,7 @@
       </div>
 
       <div
-        class="flex flex-wrap gap-2 justify-center px-4 sm:px-1 pt-3 sm:pt-0 KeyBoardWrapper"
+        class="flex flex-wrap gap-2 justify-center px-1 sm:px-1 pt-3 sm:pt-0 KeyBoardWrapper"
         v-bind:class="{
           darkModeKeyboard: darkMode,
           'opacity-50': statistics.statistics || success.success,
@@ -60,12 +60,16 @@
         />
       </div>
     </div>
-    <div  v-if="layout.settings || layout.info" class="w-full max-w-lg mx-auto h-[100vh] justify-around">
+    <div
+      v-if="layout.settings || layout.info"
+      class="w-full max-w-lg mx-auto h-[100vh] justify-around"
+    >
       <SettingsPage
         v-if="layout.settings"
         :layout="layout"
         :darkMode="darkMode"
         :toggleDarkMode="toggleDarkMode"
+        :handlesPopUp="handlesPopUp"
       />
       <InfoPage v-if="layout.info" :layout="layout" :darkMode="darkMode" />
     </div>
@@ -134,11 +138,6 @@ export default defineComponent({
     const allTheWord = getlAllWords();
     const theDate = ref(wordoftheday1.value.date);
     const word = ref(board());
-    
-    // console.log(wordoftheday);
-    // console.log("wordoftheday");
-    
-    
     const allLetters = reactive([...alphab, ...restOfElphabet1]);
     const finalLetters = reactive(endLetters);
     const layout = reactive({
@@ -149,7 +148,7 @@ export default defineComponent({
     const darkMode = ref(false);
     const currentRowIndex = ref(0) as any;
     const currentRow = computed(() => word.value[currentRowIndex.value]) as any;
-  
+
     const guess = ref([]) as any;
     const today = new Date().toLocaleDateString("he-IL", {
       timeZone: "Asia/Jerusalem",
@@ -220,7 +219,9 @@ export default defineComponent({
         wiggle,
         gridImage,
         today,
-        word
+        word,
+        finalLetters,
+        allLetters
       );
     };
 
@@ -236,6 +237,7 @@ export default defineComponent({
         wordoftheday,
         splitedWord,
         allLetters,
+        finalLetters
       );
     };
 
@@ -274,7 +276,9 @@ export default defineComponent({
           wiggle,
           gridImage,
           today,
-          word
+          word,
+          finalLetters,
+          allLetters
         );
         return;
       }

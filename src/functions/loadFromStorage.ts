@@ -12,6 +12,7 @@ export function loadFromStorage(
   wordoftheday: any,
   splitedWord: any,
   allLetters: any,
+  finalLetters: any,
 ) {
   const date = localStorage.getItem("date");
   if (!date) {
@@ -38,7 +39,7 @@ export function loadFromStorage(
 
       splited[0].forEach((letter: any, letterIndex: any) => {
         allLetters.forEach((char: any) => {
-          if (letter == char.letter) {
+          if (letter == char.letter || letter === finalLetters[char.letter] ) {
 
             if (!wordoftheday.value.includes(letter)) {
               char.position = "notInWord";

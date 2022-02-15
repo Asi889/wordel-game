@@ -5,18 +5,18 @@
       <h1 class=" text-xl">הגדרות</h1>
       <button class="pl-3 sm:pl-1 font-semibold" @click="handlClick">X</button>
     </div>
-    <div
+    <!-- <div
       class="flex justify-between border-b-2 border-gray-300 py-3 items-center"
-    >
-      <div>
+    > -->
+      <!-- <div>
         <h1>מצב קשה</h1>
         <p class="text-xs">יש להשתמש בכל רמז שנחשף בניחושים הבאים</p>
-      </div>
-      <label class="switch">
+      </div> -->
+      <!-- <label class="switch">
         <input type="checkbox" v-model="hardMode" @click="toggleHardMode" />
         <div class="slider round"></div>
-      </label>
-    </div>
+      </label> -->
+    <!-- </div> -->
     <div
       class="flex justify-between border-b-2 border-gray-300 py-3 items-center"
     >
@@ -25,9 +25,8 @@
         <input type="checkbox" v-model="darkMode" @change="toggleDarkMode"  />
         <div class="slider round"></div>
       </label>
-      <!-- <input type="checkbox" /> -->
     </div>
-    <div
+    <!-- <div
       class="flex justify-between border-b-2 border-gray-300 py-3 items-center"
     >
       <div>
@@ -38,7 +37,7 @@
         <input type="checkbox" v-model="colorBlindMode"  @click="toggleColorBlindMode" />
         <div class="slider round"></div>
       </label>
-    </div>
+    </div> -->
     <div
       class="flex justify-between border-b-2 border-gray-300 py-3 items-center"
     >
@@ -51,9 +50,9 @@
 <script>
 import { reactive } from "@vue/reactivity";
 export default {
-  props: ["layout","darkMode", "toggleDarkMode"],
+  props: ["layout","darkMode", "toggleDarkMode","handlesPopUp"],
   setup(props) {
-    const { layout, darkMode, toggleDarkMode } = props;
+    const { layout, darkMode, toggleDarkMode, handlesPopUp } = props;
     const handlClick = () => {
       layout.main = true;
       layout.settings = false;
@@ -64,6 +63,7 @@ export default {
 
     
     const toggleHardMode = () => {
+      // handlesPopUp("לא פעיל עדיין")
       console.log("toggleHardMode");
     };
     const toggleColorBlindMode = () => {

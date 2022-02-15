@@ -137,7 +137,7 @@
         </div>
         <p class="">האות נ לא נמצא במילה</p>
       </div>
-      <div class="font-bold pr-1 sm:pr-0">בכל יום יופיע וורדל חדש ליפאנוח!</div>
+      <div class="font-bold pr-1 sm:pr-0">בכל יום תופיע מילה חדשה לפענוח!</div>
       <div class="grid">
         <div class="flex  gap-2">
           <p>כל הזכויות שמורות ל</p>

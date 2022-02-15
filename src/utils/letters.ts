@@ -35,6 +35,7 @@ export const alphab =[
 
 export const restOfElphabet1 = [{letter: "ת", position:"", color: "purpule"},{letter: "ש", position:"", color: "purpule"},{letter: "ר", position:"", color: "red"},{letter: "ק", position:"", color: "purpule"},]
 export const endLetters = { "צ":"ץ", "נ":"ן", "מ":"ם", "פ":"ף", "כ":"ך" }
+export const endLettersReverse = { "ץ":"צ", "ן":"נ", "ם":"מ", "ף":"פ", "ך":"כ" }
 
 export const allWords =[
     'אנאלי',

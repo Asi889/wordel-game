@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid success justify-content-center text-center z-10 self-center fixed max-h-[466px] max-w-w[422px] bg-white rounded-lg drop-shadow-2xl border-black px-5 py-5"
+    class="flex flex-col success top-[25%] sm:top-auto justify-content-center text-center z-10 self-center fixed max-h-[466px] w-[350px] sm:w-[422px] bg-white rounded-lg drop-shadow-2xl border-black px-5 py-5"
   >
     <h1 class="text-3xl">!כל הכבוד</h1>
     <!-- <h2>שתפו את התוצאה:</h2> -->
@@ -75,30 +75,13 @@ export default defineComponent({
   props: ["gridImage","handlesPopUp", "theDate"],
   setup(props) {
     const { gridImage, handlesPopUp, theDate } = props;
-    const test1 = ref([
-      "🟩",
-      "⬜",
-      "🟨",
-      "🟩",
-      "⬜",
-      "🟨",
-      "🟩",
-      "⬜",
-      "🟨",
-      "🟩",
-      "⬜",
-      "🟨",
-      "🟩",
-      "⬜",
-      "🟨",
-    ]);
+    
 const link_url= ref("hell mary")
-    const successWords = ref([]);
     const handleShare = ()=>{
         copyResult(gridImage)
         handlesPopUp("הועתק")
     }
-    return { gridImage, test1, link_url, handleShare, theDate };
+    return { gridImage, link_url, handleShare, theDate };
   },
 });
 </script>

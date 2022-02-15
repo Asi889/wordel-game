@@ -6,7 +6,7 @@
     v-bind:class="{
       inposition: letter.position === 'inPosition',
       inword: letter.position === 'inWord',
-      notInword: letter.position === 'notInWord',
+      notInword2: letter.position === 'notInWord',
       blueChar:
         (letter.letter === 'א' && gamerKeyBoard.active === true) ||
         (letter.letter === 'ב' && gamerKeyBoard.active === true) ||
@@ -66,7 +66,7 @@
     v-bind:class="{
       inposition: letter.position === 'inPosition',
       inword: letter.position === 'inWord',
-      notInword: letter.position === 'notInWord',
+      notInword2: letter.position === 'notInWord',
       purpleChar:
         (letter.letter === 'ת' && gamerKeyBoard.active === true) ||
         (letter.letter === 'ש' && gamerKeyBoard.active === true),
@@ -79,7 +79,6 @@
     {{ letter.letter }}
   </div>
   <div
-    type="button"
     class="grid justify-center items-center text-xs sm:text-base w-[35px] h-[45px] sm:w-12 sm:h-12 text-black bg-gray-400 rounded placeholder:text-black keyboardInput"
     v-bind:class="{ greenChar: gamerKeyBoard.active === true }"
     value="Enter"
@@ -171,8 +170,8 @@ export default {
   color: white !important;
   
 }
-.notInword {
-  background-color: gray !important;
+.notInword2 {
+  background-color: rgb(105, 101, 101) !important;
   color: white !important;
 }
 

@@ -1,8 +1,8 @@
 <template>
   <div
-    class="self-center z-10 fixed statistics max-h-[466px] max-w-w[422px] slide-up h-[450px] w-[420px] bg-white rounded-lg shadow-2xl border-black px-5 py-5 bottom-[13%]"
+    class="self-center z-10 fixed statistics   slide-up h-[450px]  bg-white rounded-lg shadow-2xl border-black px-5 py-5 bottom-[13%]"
   >
-    <div class="grid">
+    <div class="grid w-[322px] sm:w-[422px]">
       <h1 class="justify-self-center text-3xl font-bold">לא הצליח הפעם</h1>
       <div class="flex gap-x-2 justify-center">
         <h2 class="justify-self-center text-2xl pt-3 font-bold">
@@ -26,7 +26,7 @@
           </div>
 
           <svg
-            class="h-14 w-14 self-center"
+            class="h-10 w-10 sm:h-14 sm:w-14 self-center"
             xmlns="http://www.w3.org/2000/svg"
             fill="white"
             version="1.1"
@@ -64,7 +64,7 @@
         </div>
       </a>
 
-      <div class="justify-self-center pt-4">
+      <div class="righttoleft text-center pt-4 ">
         <h1 class="text-2xl">המילה הבאה תופיע מחר, בהצלחה!</h1>
         <!-- <CountDown :theDate="theDate" /> -->
         <!-- <Timer :timeLeft="timeLeft" /> -->
@@ -84,7 +84,7 @@ export default defineComponent({
   components: { CountDown },
   props: ["gridImage", "wordoftheday", "handlesPopUp", "theDate"],
   setup(props) {
-    const { gridImage, wordoftheday, handlesPopUp, theDate } = props as any;
+    const { gridImage, wordoftheday, handlesPopUp } = props as any;
     
     const handleShare = () => {
       copyResult(gridImage);
@@ -100,5 +100,8 @@ export default defineComponent({
 <style>
 .statistics{
   direction: ltr;
+}
+.righttoleft{
+  direction: rtl;
 }
 </style>
