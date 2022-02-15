@@ -237,7 +237,8 @@ export default defineComponent({
         wordoftheday,
         splitedWord,
         allLetters,
-        finalLetters
+        finalLetters,
+        layout
       );
     };
 

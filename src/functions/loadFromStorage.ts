@@ -13,10 +13,13 @@ export function loadFromStorage(
   splitedWord: any,
   allLetters: any,
   finalLetters: any,
+  layout: any
 ) {
   const date = localStorage.getItem("date");
   if (!date) {
-    firstTimer.value = true;
+    layout.settings = false;
+    layout.main = false;
+    layout.info = true;
     return;
   }
 
