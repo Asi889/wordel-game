@@ -23,6 +23,8 @@ export function changeColor(currentRow, wordoftheday, splitedWord, keboardDelay)
         }
 
         if (wordoftheday.value.includes(letter.letter)) {
+            
+
                 // letter.inWord = true;
                 setTimeout(() => {
                 letter.inWord = true;
