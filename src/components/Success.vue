@@ -1,7 +1,10 @@
 <template>
   <div
     class="flex flex-col success top-[25%] sm:top-auto justify-content-center text-center z-10 self-center fixed max-h-[466px] w-[350px] sm:w-[422px] bg-white rounded-lg drop-shadow-2xl border-black px-5 py-5"
+    v-bind:class="{ closeWindow1: toggleOut.value === true }"
+    @mouseover="getposition"
   >
+  <button class="pl-3 sm:pl-1 font-semibold"  @click="outToggle">X</button>
     <h1 class="text-3xl">!כל הכבוד</h1>
     <!-- <h2>שתפו את התוצאה:</h2> -->
     <h2 class="justify-self-end text-xl pt-4 pl-8">:שתפו את התוצאה</h2>
@@ -59,6 +62,7 @@
     </a>
     <div class="justify-self-center pt-4">
       <h1 class="text-2xl">המילה הבאה תופיע מחר, בהצלחה!</h1>
+      <h1 class="text-2xl">position Y: {{positiony}}  and position X: {{positionx}}</h1>
       <!-- <CountDown :theDate="theDate" /> -->
     </div>
   </div>
@@ -68,20 +72,30 @@
 import { computed, defineComponent, reactive, ref } from "vue";
 import { copyResult } from "../functions/copyResult"
 import CountDown from "./CountDown.vue"
-
 export default defineComponent({
   name: "Success",
   components: {CountDown},
-  props: ["gridImage","handlesPopUp", "theDate"],
+  props: ["gridImage","handlesPopUp", "theDate", "outToggle", "toggleOut"],
   setup(props) {
-    const { gridImage, handlesPopUp, theDate } = props;
-    
+    const { gridImage, handlesPopUp, theDate, outToggle, toggleOut } = props;
+    // const handletoggle= ()=>{
+    //   toggleOut.value = true
+    // }
+    const positionx= ref(0)
+    const positiony= ref(0)
+    const getposition= (event: any)=>{
+      console.log(event);
+      console.log("event");
+      
+      positionx.value = event.screenX;
+      positiony.value = event.screenY;
+    }
 const link_url= ref("hell mary")
     const handleShare = ()=>{
         copyResult(gridImage)
         handlesPopUp("הועתק")
     }
-    return { gridImage, link_url, handleShare, theDate };
+    return { gridImage, link_url, handleShare, theDate, outToggle, toggleOut, positiony, positionx,getposition };
   },
 });
 </script>
@@ -89,5 +103,8 @@ const link_url= ref("hell mary")
 <style>
 .success{
   direction: ltr;
+}
+.closeWindow1{
+  display: none !important;
 }
 </style>

@@ -1,4 +1,6 @@
 export function changeColor(currentRow, wordoftheday, splitedWord, keboardDelay) {
+    console.log(splitedWord);
+    console.log("splitedWord");
     function randomIntFromInterval(min, max) { // min and max included 
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
@@ -24,22 +26,39 @@ export function changeColor(currentRow, wordoftheday, splitedWord, keboardDelay)
 
         if (wordoftheday.value.includes(letter.letter)) {
             
+            // const toFindDuplicates = (arry)=>{
 
-                // letter.inWord = true;
-                setTimeout(() => {
-                letter.inWord = true;
-                keboardDelay.value = true
-
-                // letter.notInWord = true;
-              },index * 250);
-            if(rndInt === 1){
+            //     return arry.value.filter((item, index) => arry.value.indexOf(item) !== index)
+            // } 
+            // const duplicateElementa = toFindDuplicates(splitedWord);
+            // if(duplicateElementa?.length>0){
                 
-                letter.status = "🟩"
-            }else{
-                letter.status = "⬜"
-            }
+                
+            //     setTimeout(() => {
+            //         letter.doubleLetter = true;
+            //         keboardDelay.value = true
+                    
+            //         // letter.notInWord = true;
+            //     },index * 250);
+            // }else{
+
+            // }
+            setTimeout(() => {
+            letter.inWord = true;
+            keboardDelay.value = true
+
+            // letter.notInWord = true;
+          },index * 250);
+        if(rndInt === 1){
+            
+            letter.status = "🟩"
+        }else{
+            letter.status = "⬜"
+        }
+                // letter.inWord = true;
             splitedWord.value.forEach((char, index1) => {
                 if (char === letter.letter && index1 === index) {
+                    console.log("boooom shakalak");
                     // letter.rightPosition = true;
                     setTimeout(() => {
                         letter.rightPosition = true;
@@ -56,4 +75,6 @@ export function changeColor(currentRow, wordoftheday, splitedWord, keboardDelay)
             });
         }
     });
+    console.log(currentRow);
+                console.log("duplicateElementa111212121212121");
 }

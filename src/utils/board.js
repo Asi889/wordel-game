@@ -5,7 +5,7 @@ export const board = () => {
             let wordObj= {rowNUm: i, tried: false, letters:[] }
             tiles.push(wordObj)
             for (let j = 1; j < 6; j++) {
-                let wrodJ= { id: j, letter: "", inWord: "", rightPosition: "", notInWord: "", status: "", flipped: false }
+                let wrodJ= { id: j, letter: "", inWord: "", rightPosition: "", notInWord: "", status: "", doubleLetter: "", flipped: false }
                 wordObj.letters.push(wrodJ)
             }
         }

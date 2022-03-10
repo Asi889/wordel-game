@@ -6,5 +6,5 @@ import VueGtag from "vue-gtag";
 
 
 createApp(App).use(VueGtag, {
-    id: '303765259',
+   config:{ id: 'UA-125028226-2',}
 }).mount('#app')

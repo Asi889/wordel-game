@@ -42,6 +42,10 @@ export function makeguess2(keboardDelay, computedGuess, allTheWord, success, cur
 
   ////// Create Gtrid Img /////
   createGrid1(gridImage, word)
+  setTimeout(() => {
+    console.log(word);
+    console.log("allLetters");
+  }, 4000);
   ///// Correct guess  /////
   if (computedGuess.value === wordoftheday.value) {
     currentRowIndex.value = currentRowIndex.value + 1;

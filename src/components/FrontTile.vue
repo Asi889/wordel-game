@@ -21,6 +21,7 @@
           darkModeRows: darkMode,
           active1: char.letter.length > 0,
           inword: char.inWord === true,
+          double2: char.doubleLetter === true,
           inposition: char.rightPosition === true,
           notInword: char.notInWord === true,
         }"
@@ -62,11 +63,20 @@ export default defineComponent({
 
 .inword {
   background-color: rgb(210 179 92);
-  color: rgb(236, 179, 54);
+  color: rgb(236, 179, 54)!important;
+  color: white !important;
+}
+.double2 {
+  background:
+        linear-gradient(#6bc26b, transparent),
+        linear-gradient(to right, #f272bd, transparent);
+    /* background-blend-mode: screen; */
+
+  /* background-color:#fc8dcd!important; */
   color: white !important;
 }
 .inposition {
-  background-color: rgb(107, 194, 107) !important;
+  background-color: #6bc26b !important;
   color: white !important;
 }
 .notInword {

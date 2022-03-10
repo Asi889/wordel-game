@@ -62,7 +62,7 @@ export function loadFromStorage(
   }
 
   if (grid4) {
-    let flatGrid= grid4[0].replaceAll(',', '')
+    // let flatGrid= grid4[0].replaceAll(',', '')
     // let ggg = flatGrid.
     gridImage.value = [grid4[0].replaceAll(',', '')];
     
@@ -87,6 +87,7 @@ export function loadFromStorage(
       setTimeout(() => {
         success.success = true;
       }, 1000);
+      return
     }
     if (rowNum === 5) {
       setTimeout(() => {

@@ -18,6 +18,8 @@
         :gridImage="gridImage"
         :handlesPopUp="handlesPopUp"
         :theDate="theDate"
+        :outToggle="outToggle"
+        :toggleOut="toggleOut"
       />
       <Statistics
         v-if="statistics.statistics === true"
@@ -25,6 +27,8 @@
         :wordoftheday="wordoftheday"
         :handlesPopUp="handlesPopUp"
         :theDate="theDate"
+        :outToggle="outToggle"
+        :toggleOut="toggleOut"
       />
       <div
         class="mt-5 sm:mt-14 relative flex flex-col gap-y-4"
@@ -134,7 +138,11 @@ export default defineComponent({
   },
   setup() {
     const wordoftheday1 = ref(getTodayWord()) as any;
-    const wordoftheday = ref(wordoftheday1.value.word) as any;
+    const wordoftheday = ref("כימאי") as any;
+    // const wordoftheday = ref(wordoftheday1.value.word) as any;
+    console.log(wordoftheday);
+    console.log("wordoftheday");
+    
     const allTheWord = getlAllWords();
     const theDate = ref(wordoftheday1.value.date);
     const word = ref(board());
@@ -163,6 +171,7 @@ export default defineComponent({
     const firstTimer = ref(false) as any;
     const gamerKeyBoard = reactive({ active: false });
     const keboardDelay = ref(true);
+    const toggleOut= ref(false)
 
     const computedGuess = computed(() => {
       let word1 = "";
@@ -188,6 +197,11 @@ export default defineComponent({
     const toggleDarkMode = () => {
       darkMode.value = !darkMode.value;
     };
+    const outToggle= ()=>{
+      console.log("in");
+      
+      success.success= false
+    }
 
     const removeChar = () => {
       deleteKey(success, currentRow, guess);
@@ -309,6 +323,8 @@ export default defineComponent({
       theDate,
       removeChar,
       enterKey,
+      outToggle,
+      toggleOut
     };
   },
 });
