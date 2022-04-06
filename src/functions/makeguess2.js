@@ -5,7 +5,7 @@ import { createGrid1 } from "./createGrid1"
 import { activateFlip1 } from "./activateFlip1.ts"
 import { saveToStorage } from "./saveToStorage"
 
-export function makeguess2(keboardDelay, computedGuess, allTheWord, success, currentRow, guess, wordoftheday, splitedWord, computedKeyBoard, currentRowIndex, guessNum, statistics, popUpValue, wiggle, gridImage, today, word, finalLetters, allLetters) {
+export function makeguess2(keboardDelay, computedGuess, allTheWord, success, currentRow, guess, wordoftheday, splitedWord, computedKeyBoard, currentRowIndex, guessNum, statistics, popUpValue, wiggle, gridImage, today, word, finalLetters, allLetters, duplicatedletters, splitedWordCopy) {
   // keboardDelay.value = false;
 
   if (success.success === true) {
@@ -37,14 +37,13 @@ export function makeguess2(keboardDelay, computedGuess, allTheWord, success, cur
   //   }
   // });
 
-  changeColor(currentRow, wordoftheday, splitedWord, keboardDelay);
+  changeColor(currentRow, wordoftheday, splitedWord, keboardDelay, duplicatedletters, splitedWordCopy);
   changeColorKeyBoard(computedKeyBoard, wordoftheday, splitedWord);
 
   ////// Create Gtrid Img /////
   createGrid1(gridImage, word)
   setTimeout(() => {
-    console.log(word);
-    console.log("allLetters");
+    ;
   }, 4000);
   ///// Correct guess  /////
   if (computedGuess.value === wordoftheday.value) {

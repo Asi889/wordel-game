@@ -1,6 +1,6 @@
-export function changeColor(currentRow, wordoftheday, splitedWord, keboardDelay) {
-    console.log(splitedWord);
-    console.log("splitedWord");
+export function changeColor(currentRow, wordoftheday, splitedWord, keboardDelay, duplicatedletters, splitedWordCopy) {
+    
+    const duplicatedLetters = [];
     function randomIntFromInterval(min, max) { // min and max included 
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
@@ -25,6 +25,10 @@ export function changeColor(currentRow, wordoftheday, splitedWord, keboardDelay)
         }
 
         if (wordoftheday.value.includes(letter.letter)) {
+
+            // duplicatedletters = splitedWordCopy.filter((item, pos)=> splitedWordCopy.indexOf(item) !== pos)
+            // console.log(duplicatedletters);
+            // console.log("duplicatedletters");
             
             // const toFindDuplicates = (arry)=>{
 
@@ -58,7 +62,6 @@ export function changeColor(currentRow, wordoftheday, splitedWord, keboardDelay)
                 // letter.inWord = true;
             splitedWord.value.forEach((char, index1) => {
                 if (char === letter.letter && index1 === index) {
-                    console.log("boooom shakalak");
                     // letter.rightPosition = true;
                     setTimeout(() => {
                         letter.rightPosition = true;
@@ -75,6 +78,5 @@ export function changeColor(currentRow, wordoftheday, splitedWord, keboardDelay)
             });
         }
     });
-    console.log(currentRow);
-                console.log("duplicateElementa111212121212121");
+    
 }

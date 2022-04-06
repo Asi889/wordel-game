@@ -138,10 +138,10 @@ export default defineComponent({
   },
   setup() {
     const wordoftheday1 = ref(getTodayWord()) as any;
-    const wordoftheday = ref("כימאי") as any;
-    // const wordoftheday = ref(wordoftheday1.value.word) as any;
-    console.log(wordoftheday);
-    console.log("wordoftheday");
+    // const wordoftheday = ref("כימאי") as any;
+    const wordoftheday = ref(wordoftheday1.value.word) as any;
+    // console.log(wordoftheday);
+    // console.log("wordoftheday");
     
     const allTheWord = getlAllWords();
     const theDate = ref(wordoftheday1.value.date);
@@ -161,7 +161,11 @@ export default defineComponent({
     const today = new Date().toLocaleDateString("he-IL", {
       timeZone: "Asia/Jerusalem",
     });
-    const splitedWord = computed(() => wordoftheday.value.split(""));
+    const splitedWord = computed(() => wordoftheday.value.split("")) as any;
+    const splitedWordCopy= wordoftheday.value.split("")
+    
+    
+    const duplicatedletters =ref([])
     const guessNum = ref(0);
     const wiggle = reactive({ wiggle: false });
     const statistics = reactive({ statistics: false });
@@ -198,7 +202,7 @@ export default defineComponent({
       darkMode.value = !darkMode.value;
     };
     const outToggle= ()=>{
-      console.log("in");
+      // console.log("in");
       
       success.success= false
     }
@@ -235,7 +239,9 @@ export default defineComponent({
         today,
         word,
         finalLetters,
-        allLetters
+        allLetters,
+        duplicatedletters,
+        splitedWordCopy
       );
     };
 
